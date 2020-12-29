@@ -1,0 +1,131 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "Go for the C# Developer",
+  "steps": [
+    {
+      "file": "async/main.go",
+      "line": 61,
+      "description": "## No semi-colons\r\n\r\nGo does not use semi-colons to end lines. Semi-colons can be used to put two statements on a single line (but as with most languages, this is discouraged).",
+      "selection": {
+        "start": {
+          "line": 58,
+          "character": 1
+        },
+        "end": {
+          "line": 61,
+          "character": 18
+        }
+      }
+    },
+    {
+      "file": "async/main.go",
+      "line": 74,
+      "description": "## Braces\r\n\r\nFor anything that has a body (functions, for loops, if/else, etc.), opening braces **must** be on the same line. Putting an opening brace on the following line results in a compiler error.\r\n\r\nIn addition, braces are **never optional**. If there is only one line in a body, braces must still be used.",
+      "selection": {
+        "start": {
+          "line": 70,
+          "character": 1
+        },
+        "end": {
+          "line": 75,
+          "character": 1
+        }
+      }
+    },
+    {
+      "file": "async/main.go",
+      "line": 37,
+      "description": "## Variable declaration\r\n\r\nVariables can be declared with the \"var\" keyword followed by the name and the type. When declaring variables, parameters, and named return values, the name always comes first, followed by the type. (This is the reverse of C# type-name declaration).\r\n\r\nThis line declares a variable named \"p\" which is of type \"person\"."
+    },
+    {
+      "file": "async/main.go",
+      "line": 28,
+      "description": "## Variable declaration and assignment\r\n\r\nVariables can be declared and assigned at the same time using the \":=\" operator. This statement declares and assigns a variable named \"url\". The type is infered based on what is on the other side of the operator. The \"Sprintf\" function returns a string, so \"url\" is of type \"string\". This is similar to the \"var\" syntax used in C#.\r\n\r\nThe following are equivalent:  \r\nGo  \r\n```go\r\n  url := fmt.Sprintf(\"http://localhost:9874/people/%d\", id)\r\n```\r\n\r\nC#  \r\n```c#\r\n  var url = string.Format(\"http://localhost:9874/people/{0}\", id);\r\n```"
+    },
+    {
+      "file": "async/main.go",
+      "line": 58,
+      "description": "## Entry Point - func main()\r\n\r\nThe main() function is the entry point of the application. Unlike C#, this function has no arguments. If you need to access the command-line arguments, you can use the \"os.Args\" collection (from the \"os\" package).\r\n\r\nWe'll take a look at parameters and return types of functions at a later step.",
+      "selection": {
+        "start": {
+          "line": 58,
+          "character": 1
+        },
+        "end": {
+          "line": 58,
+          "character": 14
+        }
+      }
+    },
+    {
+      "file": "async/main.go",
+      "line": 1,
+      "description": "## Packages and package main\r\n\r\nThe \"main\" package has the entry point for an application (see func main() step). A package in Go is similar to a namespace in C#.  \r\n\r\nUsing a name other than \"main\" for the package creates a library of code that can be accessed from other packages. Packages can consist of multiple files. To use a package, list it in the \"import\" section of the file.",
+      "selection": {
+        "start": {
+          "line": 1,
+          "character": 1
+        },
+        "end": {
+          "line": 1,
+          "character": 13
+        }
+      }
+    },
+    {
+      "file": "async/main.go",
+      "line": 3,
+      "description": "## import\r\n\r\nThe \"import\" section specifies that packages that are used in this file. This is similar to \"using\" statements in C#.\r\n\r\n**Go is opinionated**  \r\nIf you list a package that is not used in the file, then you will get a compiler error. The good news is that if you are using an editor helper (such as the \"Go\" extension in Visual Studio Code), unused imports will automatically be removed when you save the file. These helpers will also add the import automatically when you reference a package in the code. So, its best to let the editor helper manage all of this for you."
+    },
+    {
+      "file": "async/main.go",
+      "line": 61,
+      "description": "## fmt.Println\r\n\r\n\"Println\" outputs to standard out (usually the console); the output is followed by a newline. This is similar to Console.WriteLine() in C#.  \r\n\r\n\"Println\" is in the \"fmt\" package. This means that \"fmt\" needs to be in the list of imports at the top of the file. If you are using the Go extension for Visual Studio Code, you can just type \"fmt.Println\" and save the file. When you save, the import is automatically added.\r\n\r\nThe following are equivalent:  \r\nGo  \r\n```go\r\n  fmt.Println(ids)\r\n```\r\n\r\nC#  \r\n```c#\r\n  Console.WriteLine(ids);\r\n```"
+    },
+    {
+      "file": "async/main.go",
+      "line": 84,
+      "description": "## fmt.Printf\r\n\r\n\"Printf\" is a formatted print statement that goes to standard out (usually the console). This uses placeholders and parameters similar to string.Format() in C#.  \r\n\r\nIn this example, the \"%d\" placeholder will output an number (the id of a \"Person\" object). The \"%v\" placeholder outputs an item in the \"standard format\". This is similar to the \"ToString\" method in C#. We'll see a bit more of this when we look at interfaces.  \r\n\r\nThe following are equivalent:  \r\nGo  \r\n```go\r\n  fmt.Printf(\"%d: %v\\n\", p.ID, p)\r\n```\r\n\r\nC#  \r\n```c#\r\n  Console.Write(\"{0:d}: {1}\\n\", p.ID, p);\r\n```\r\n\r\nUnlike \"Println\", \"Printf\" does not include a newline automatically, so you most likely want to include a \"\\n\" to insert a newline (just like in C#).  \r\n\r\nUnfortunately, there is no equivalent of string interpolation in Go."
+    },
+    {
+      "file": "async/main.go",
+      "line": 13,
+      "description": "## Function declarations 1\r\n\r\n**func**  \r\nFunction declarations start with the \"func\" keyword.\r\n\r\n**Function Name**  \r\nNext comes the name of the function \"getIds\" for this example.  \r\n\r\n*Note: Capitalization is important in Go. An upper-case function name means that the function is exported (meaning, it is visible to other packages that import this) -- similar to a \"public\" item in C#. A lower-case function name means that the function is not visible outside of this package. This is similar to \"protected\" item in C#.*  \r\n\r\n**Function Parameters**\r\nNext comes the function parameters in parentheses. This function has no parameters, so it has an empty set of parens. Parameters are separated by commas and are declared with the parameter name and then the type. For example, \"(id int)\" would specify a parameter named \"id\" of type integer. This is flipped around compared to declarations in C# that have the type first.  \r\n\r\n**Function Returns**  \r\nNext comes the return types for the function. If there is no return, then this can be left out completely (no empty parens required). Unlike C#, return values can be named. In this example, there is a return value named \"ids\" which is a slice of integer (a slice is basically a dynamic array). Naming return values is optional; you can simply specify the type of you like.\r\n\r\nGo functions can have multiple return values (which is really handy). If there are multiple return values, they are separated by commas. A common pattern in Go is to return a value and an error object. We'll see this a bit later."
+    },
+    {
+      "file": "async/main.go",
+      "line": 24,
+      "description": "## Bare returns\r\n\r\nIn this function, we have a named return value: \"ids\" (as noted in the previous step). In the body of the function, we assign to the \"ids\" item (this is done in the \"json.Unmarshal\" call on the previous line). To return the value of \"ids\", we can use either of the following:  \r\n\r\n```go\r\n  return ids\r\n```\r\n\r\n```go\r\n  return\r\n```  \r\n\r\nThese statements are equivalent; they both return the value of \"ids\". The second is known as a \"bare return\" since the return is implicit. This is possible because the return value is named in the function declaration. Bare returns can only be used if the return values are named. If they are unnamed, then the value needs to be specified with the \"return\"."
+    },
+    {
+      "file": "async/main.go",
+      "line": 27,
+      "description": "## Function declarations 2\r\n\r\nThis function takes one parameter and returns two values.  \r\n\r\n**Parameter**  \r\nThe first set of parens declare the parameter. In this case, the parameter is named \"id\" and is of type integer. Note that the declaration of the name and type is reversed when compared to C#.\r\n\r\n**Return Values**  \r\nThe second set of parens declare the return values. As noted earlier, Go allows for multiple return values from a single function. This function uses a standard pattern of returning data or an error. Generally one of these values will be \"nil\" (\"null\" in C#).  \r\n\r\nIn contrast to the prior example, these return values are not named -- only the types are specified. This means that we cannot use a \"bare return\".  "
+    },
+    {
+      "file": "async/main.go",
+      "line": 42,
+      "description": "## Return values\r\n\r\nThis function specifies two return values: a person and an error. This line shows the \"happy path\". It returns a person (the local variable \"p\") and \"nil\" for the error. \"nil\" is the same as \"null\" in C#.  \r\n\r\nSince the return values are not named for this function, we cannot use a \"bare return\", we must supply both values with the \"return\" statement."
+    },
+    {
+      "file": "async/main.go",
+      "line": 33,
+      "description": "## Deferring an operation\r\n\r\nThe \"defer\" keyword allows us to defer an operation until the function is about to exit. This is similar to the \"finally\" part of a \"try/finally\" in C#.  \r\n\r\nIn C#, the code would look similar to this (a bit of pseudo-code):  \r\n```c#\r\n  try {\r\n    var resp = GetHttpResponse(url);\r\n    var person = ParseResponse(resp.Body);\r\n    return person;\r\n  }\r\n  catch(Exception ex) {\r\n    log.LogException(ex);\r\n  }\r\n  finally {\r\n    resp.Body.Close();\r\n  }\r\n```\r\n\r\nIn this example, \"resp\" is an HTTP Response. The \"Body\" of the response needs to be closed after it is used regardless of whether there is an error or not. When we use \"defer\" (like a \"finally\"), this code will run just before the function exits, regardless of the code path.  \r\n\r\nThe thing I like about \"defer\" is that it lets you put the code near where you are thinking about it. In this example, I can remember to close the Body just after I retrieve the body; I don't have to remember to put it at the end of the function (like in a C# \"finally\")."
+    },
+    {
+      "file": "async/main.go",
+      "line": 52,
+      "description": "## Using struct for data  \r\n\r\nA struct is a group of values (called \"fields\") that can be treated as a unit. Unlike a struct in C#, a struct in Go cannot directly contain functionality. However, functionality can be added indirectly to structs using methods. (We'll see this a bit later when looking at interfaces.)  \r\n\r\nThis struct represents a person -- in particular, this is a set of data that is pulled from a service. The service provides this using JSON.\r\n\r\nNotice that the field types are column-aligned. This is something the Go extension did automatically.\r\n\r\n**Capitalization is important**  \r\nAs mentioned previously, capitalization determines the visibility of items. In this case, \"person\" is lower case and is only available within this package.  \r\n\r\nThe fields names are capitalized to allow them to be visibile externally. Why is this important? When I was parsing the JSON, I had a problem when the field names were lower case (even though the JSON field names are also lower case); the fields were all blank. However, when I changed the field names to start with upper case letters, the parsing worked.  \r\n\r\n**Go is opinionated**  \r\nAs another note, when I used \"Id\" as a field name, the linter complained: \"struct field Id should be ID\".",
+      "selection": {
+        "start": {
+          "line": 45,
+          "character": 1
+        },
+        "end": {
+          "line": 52,
+          "character": 2
+        }
+      }
+    }
+  ]
+}
