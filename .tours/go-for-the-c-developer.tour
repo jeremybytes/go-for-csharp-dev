@@ -44,6 +44,26 @@
     },
     {
       "file": "async/main.go",
+      "line": 65,
+      "description": "## No unused variables\r\n\r\nGo does not allow for unused variables. If you declare a variable and then do not use it, you will get a compiler error. To get around this, we can use an underscore \"_\" (known as a **blank identifier**). This means that we will not be using the value.\r\n\r\nThis \"for\" loop using a \"range\" is similar to a \"foreach\" loop in C#. It will iterate over the values in the \"ids\" collection. But \"range\" returns two values (more on multiple return values when we look at function declarations below), the index of the loop and the value of the iteration.\r\n\r\nFor this code, we care about the value (\"n\"), but not the indexer. By using the blank identifier (\"_\") for the indexer, we are noting that we will not be using this value. (We'll look at the different kinds of \"for\" loops a bit later)."
+    },
+    {
+      "file": "async/main.go",
+      "line": 38,
+      "description": "## Pointers  \r\n\r\nGo has pointers. We won't go into the details of pointers here, but just mention them. You'll want to dive deeper into this when you're ready. We'll just take a quick look at how a pointer can be used similar to an \"out\" parameter in C#.\r\n\r\nIn this example, a JSON decoder has a \"Decode\" function. The parameter of the function is the object that we want the JSON decoded into (in this case the \"p\" variable declared on the previous line). The behavior is similar to an \"out\" parameter in C#. To use this, we pass \"&p\" as the parameter. This passes the address of the variable so that the value at that address can be modified by the \"Decode\" function.  \r\n\r\nReferencing and de-referencing pointers can be challenging. (I though I left pointers behind when I was done with C++ years ago.) Some additional reading on pointer usage will be helpful in the long run.",
+      "selection": {
+        "start": {
+          "line": 37,
+          "character": 2
+        },
+        "end": {
+          "line": 38,
+          "character": 45
+        }
+      }
+    },
+    {
+      "file": "async/main.go",
       "line": 58,
       "description": "## Entry Point - func main()\r\n\r\nThe main() function is the entry point of the application. Unlike C#, this function has no arguments. If you need to access the command-line arguments, you can use the \"os.Args\" collection (from the \"os\" package).\r\n\r\nWe'll take a look at parameters and return types of functions at a later step.",
       "selection": {
@@ -85,7 +105,17 @@
     {
       "file": "async/main.go",
       "line": 84,
-      "description": "## fmt.Printf\r\n\r\n\"Printf\" is a formatted print statement that goes to standard out (usually the console). This uses placeholders and parameters similar to string.Format() in C#.  \r\n\r\nIn this example, the \"%d\" placeholder will output an number (the id of a \"Person\" object). The \"%v\" placeholder outputs an item in the \"standard format\". This is similar to the \"ToString\" method in C#. We'll see a bit more of this when we look at interfaces.  \r\n\r\nThe following are equivalent:  \r\nGo  \r\n```go\r\n  fmt.Printf(\"%d: %v\\n\", p.ID, p)\r\n```\r\n\r\nC#  \r\n```c#\r\n  Console.Write(\"{0:d}: {1}\\n\", p.ID, p);\r\n```\r\n\r\nUnlike \"Println\", \"Printf\" does not include a newline automatically, so you most likely want to include a \"\\n\" to insert a newline (just like in C#).  \r\n\r\nUnfortunately, there is no equivalent of string interpolation in Go."
+      "description": "## fmt.Printf\r\n\r\n\"Printf\" is a formatted print statement that goes to standard out (usually the console). This uses placeholders and parameters similar to string.Format() in C#.  \r\n\r\nIn this example, the \"%d\" placeholder (called a \"verb\" in Go) will output an number (the id of a \"Person\" object). The \"%v\" verb outputs an item in the \"natural format\". This is similar to the \"ToString\" method in C#. We'll see a bit more of this when we look at interfaces.  \r\n\r\nThe following are equivalent:  \r\nGo  \r\n```go\r\n  fmt.Printf(\"%d: %v\\n\", p.ID, p)\r\n```\r\n\r\nC#  \r\n```c#\r\n  Console.Write(\"{0:d}: {1}\\n\", p.ID, p);\r\n```\r\n\r\nUnlike \"Println\", \"Printf\" does not include a newline automatically, so you most likely want to include a \"\\n\" to insert a newline (just like in C#).  \r\n\r\nUnfortunately, there is no equivalent of string interpolation in Go."
+    },
+    {
+      "file": "async/main.go",
+      "line": 28,
+      "description": "## Other print functions\r\n\r\nIn addition to the Println and Printf functions that output to standard out (generally the console), there are other functions to print formatted output.  \r\n\r\n**Strings - Sprintf**  \r\nThe fmt.Sprintf function returns a formatted string. This uses the same placeholders as fmt.Printf.  \r\n\r\n**Files - Fprintf**  \r\nThe fmt.Fprintf function can be used to output a formatted string to a file. This function takes an io.Writer as a parameter. This is often used to write to a file, but it can also be used to write to an HTTP response.  "
+    },
+    {
+      "file": "async/main.go",
+      "line": 31,
+      "description": "## fmt.Errorf  \r\n\r\nThe fmt.Errorf function outputs a formatted string as an error type. This uses the same placeholders as Printf. We'll see more on error handling a bit later."
     },
     {
       "file": "async/main.go",
@@ -109,6 +139,31 @@
     },
     {
       "file": "async/main.go",
+      "line": 14,
+      "description": "## Multiple return values\r\n\r\nThe \"http.Get\" function returns two values: a response and an error. If the operation completes successfully, then the response will be populated and the error will be nil (null in C#). If the operation fails, then the response will be nil and the error will be populated.\r\n\r\nTo capture the return values, we can use the \":=\" to declare and assign the values to local variables. The variables are separated by commas. In this case, both \"resp\" (type *Response) and \"err\" (type error) are declared and populated."
+    },
+    {
+      "file": "async/main.go",
+      "line": 41,
+      "description": "## Error handling\r\n\r\nAs mentioned above, a common pattern is for a function to return a data value and and error. A common pattern for checking errors is shown above. If a function returns an error, we check to see if the error is nil. If it is not nil (meaning, there was an error), we handle the error by adding our own message and passing it along.\r\n\r\nThis error check is in the \"getPerson\" function. If the result from the service cannot be parsed into the \"person\" struct (using the \"Decode\" function), an error will be returned.\r\n\r\n**fmt.Errorf**  \r\nIf there is an error, we use the \"Errorf\" function to add our own message to the error object and pass it along as a return value for the \"getPerson\" function.\r\n\r\n**Error conventions**  \r\nThe convention for handling errors is to prepend the error with your own message. In this example, we add \"error parsing person:\" to the error that is returned from the JSON decoder. Since this message will potentially be prepended by whatever method gets this error, certain conventions are followed:  \r\n\r\n* The error message should start with a lower case letter.  \r\n* The error message should not contain periods or other terminating characters.\r\n* The error message should not contain new line characters.  \r\n\r\nThese conventions keep the error message as a single string that is read similar to a call stack: the first part of the string is the outermost message, then each message works its way inward until the final part of the string shows the initial error. Note that these conventions are enforced by the Go linter that is part of the Go extension for Visual Studio Code.  \r\n\r\n**Exceptions**\r\nYou probably notice that error handling involving strings is handled as part of the normal code flow -- meaning, it's up to the developer to decide what to do with an error. This is different from exceptions in C# where the flow control passes from the developer to the system, the call stack is unwound, and exceptions move up until they reach an appropriate handler.  \r\n\r\nGo does have an equivalent of an exception which is a **panic**. This is reserved for true unexpected / illegal states, such as trying to read beyond the end of an array or writing to a closed channel. A panic cannot be handled and (similar to an unhandled exception) will cause the application to exit.  \r\n\r\nThe general philosophy of error handling in Go is that we deal with expected situations (such as an error status coming back from a web server) using **error**. ",
+      "selection": {
+        "start": {
+          "line": 39,
+          "character": 2
+        },
+        "end": {
+          "line": 41,
+          "character": 3
+        }
+      }
+    },
+    {
+      "file": "async/main.go",
+      "line": 65,
+      "description": "## for loops\r\n\r\nGo has one type of loop: the \"for\" loop. The good news is that this can be used the same as \"for\", \"foreach\", and \"while\" in C#.  \r\n\r\n**Indexed for loop**  \r\n```go\r\n  for i := 0; i < len(ids); i++ {\r\n      // use the indexer here.\r\n  }\r\n```\r\nSimilar to a \"for\" loop in C#, the \"for\" loop in go can be used as a loop with an indexer. In this loop, the built-in \"len\" function gives us the length of the \"ids\" slice.  \r\n\r\n**Iteration (foreach)**  \r\n```go\r\n  for index, value := range ids {\r\n      a := ids[index]\r\n      b := value\r\n      // a & b have the same value.\r\n  }\r\n```\r\nThe \"for\" loop can be used with a range similar to a \"foreach\" in C#. The loop will iterate one time for each item in the range. Unlike \"foreach\" in C#, using \"range\" in Go returns two values: the index and the value. This gives us the option of using the indexer or the actual item value. Often we want to use just one of these inside the loop, so we use the blank identifier (\"_\") for the one we do not need.\r\n\r\nNote: if we do not need to capture the value or the indexer (we just want to iterate a certain number of times), we can leave out the variable assignments.\r\n\r\n```go\r\n  for range ids {\r\n    // the body will run based on the number of items in the range\r\n  }\r\n```\r\n\r\n**while(true)**  \r\nSometimes in C#, we want to use a \"while(true)\" as an endless loop that is terminated with a break statement inside the loop body. This can be done using \"for\" with no condition in Go.  \r\n\r\n```go\r\n  for {\r\n    // endless loop that runs until \"break\" is used.\r\n  }\r\n```\r\n\r\n**break & continue**  \r\n\"break\" and \"continue\" can be used on \"for\" loops in Go. They behave just the same as in C#. \"break\" stops the loop; \"continue\" moves to the next iteration of the loop."
+    },
+    {
+      "file": "async/main.go",
       "line": 33,
       "description": "## Deferring an operation\r\n\r\nThe \"defer\" keyword allows us to defer an operation until the function is about to exit. This is similar to the \"finally\" part of a \"try/finally\" in C#.  \r\n\r\nIn C#, the code would look similar to this (a bit of pseudo-code):  \r\n```c#\r\n  try {\r\n    var resp = GetHttpResponse(url);\r\n    var person = ParseResponse(resp.Body);\r\n    return person;\r\n  }\r\n  catch(Exception ex) {\r\n    log.LogException(ex);\r\n  }\r\n  finally {\r\n    resp.Body.Close();\r\n  }\r\n```\r\n\r\nIn this example, \"resp\" is an HTTP Response. The \"Body\" of the response needs to be closed after it is used regardless of whether there is an error or not. When we use \"defer\" (like a \"finally\"), this code will run just before the function exits, regardless of the code path.  \r\n\r\nThe thing I like about \"defer\" is that it lets you put the code near where you are thinking about it. In this example, I can remember to close the Body just after I retrieve the body; I don't have to remember to put it at the end of the function (like in a C# \"finally\")."
     },
@@ -123,6 +178,21 @@
         },
         "end": {
           "line": 52,
+          "character": 2
+        }
+      }
+    },
+    {
+      "file": "async/main.go",
+      "line": 56,
+      "description": "## Implementing interfaces\r\n\r\nGo uses implicit implementation for interfaces. This means that we do not need to explicitly state that a type implements an interface. Instead, we just provide the methods required by the interface, and the type is automatically considered to be an implementer.\r\n\r\n**The Stringer interface**  \r\nAs an example, we will use the \"fmt.Stringer\" interface. This is an interface that determines the \"natural format\" for a type (the one used by the \"%v\" verb of Printf). We can think of this as the \"ToString\" method in C#. If we do not implement this interface, then the natural format of a struct is the list of all the field values (in each value's natural format).\r\n\r\nHere is the \"Stringer\" interface from the \"fmt\" package:  \r\n```go\r\ntype Stringer interface {\r\n    String() string\r\n}\r\n```  \r\n\r\n**Methods**  \r\nA method is a function that belongs to a particular type. In this instance, we want to create a \"String\" function that matches the interface and associate it with the \"person\" type. As with C#, the method signature needs to match the interface (meaning have the same name, parameters, and return values).  For this example, we need a \"String\" function that takes no parameters and returns a string.  \r\n\r\n**Method receiver**  \r\nTo associate the function with the \"person\" type, we add what is known as a \"method receiver\" in Go. Between the \"func\" keyword and the name of the function, we add the type that we want to associate this function with. For this example, \"p person\" is the method receiver (enclused on parens). This gives us the type (person) as well as a variable name (p) that can be referenced in the method body.  \r\n\r\nWith this method declared, when a \"person\" type is output using the natural format (\"%v\"), it will print the GivenName field follwed by a space and then the FamilyName field.",
+      "selection": {
+        "start": {
+          "line": 54,
+          "character": 1
+        },
+        "end": {
+          "line": 56,
           "character": 2
         }
       }

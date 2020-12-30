@@ -24,13 +24,14 @@ If you want to build and run the code, you will need to have both Go and .NET 5 
 This project assumes that you have both "go" (this was created with version 1.14.5) and "dotnet" (this was created with 5.0.101) installed. Visit [https://golang.org/doc/install](https://golang.org/doc/install) and [https://dotnet.microsoft.com/download](https://dotnet.microsoft.com/download) to download the tools. In addition, I highly recommned using the "Go" extension with Visual Studio Code: [https://marketplace.visualstudio.com/items?itemName=golang.go](https://marketplace.visualstudio.com/items?itemName=golang.go). Samples should work on all platforms supported by the runtimes (Windows, macOS, and Linux).
 
 **/async** contains the Go program  
-**/net-core-people-service** contains a .NET 5 service (used by the Go program)  
+**/net-people-service** contains a .NET 5 service (used by the Go program)  
+**/go-people-service** contains a Go service (equivalent to the .NET 5 service). This is mainly here to show how the service can be re-created using Go.
 
 The Go program is a console application that calls the .NET service and displays the output. In order to show concurrency, the application gets each record individually.
 
 Running the Service
 -------------------  
-The .NET service can be started from the command line by navigating to the ".../net-people-service" directory and typing `dotnet run`. This provides endpoints at the following locations:
+The **.NET service** can be started from the command line by navigating to the ".../net-people-service" directory and typing `dotnet run`. This provides endpoints at the following locations:
 
 * http://localhost:9874/people  
 Provides a list of "Person" objects. This service will delay for 3 seconds before responding. Sample result:
@@ -54,6 +55,15 @@ Provides an individual "Person" record based on the "id" value. This service wil
 ```json
 {"id":1,"givenName":"John","familyName":"Koenig","startDate":"1975-10-17T00:00:00-07:00","rating":6,"formatString":null}
 ```
+
+The Go Service
+---------------------
+The **Go service** can be started from the command line by navigating to the ".../go-people-service" directory and typing `go build` to build the service, then typing `.\go-people-service.exe` to run the service in Windows, or `./go-people-service` to run the service in Linux or macOS.  
+
+Note: This service uses the same endpoints as the .NET service (on localhost:9874). You will want to run the .NET service **or** the Go service, but not both.
+
+**CodeTour**  
+At some point, I may put together a CodeTour that walks through the Go service, but that is not in place at this time.
 
 The Go Sample Program
 ---------------------
