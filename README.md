@@ -71,5 +71,6 @@ The **/async** folder contains the "main.go" file which is the completed project
 
 If you would like a step-by-step walkthrough of how this application was built, check out the video walkthrough ([A Tour of Go (golang) for the C# Developer](https://youtu.be/NW-8WpnGQtE)) and the accompanying GitHub repo ([https://github.com/jeremybytes/video-go-for-csharp-dev](https://github.com/jeremybytes/video-go-for-csharp-dev))
 
-**Other Topics**  
+Other Topics
+------------
 This is by no means an exhaustive look at Go. Additional topics and topics to look into further include packages, exports, project structure, types, interfaces, and pointers.
