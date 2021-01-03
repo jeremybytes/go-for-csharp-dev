@@ -69,9 +69,9 @@ func main() {
 			p, err := getPerson(id)
 			if err != nil {
 				log.Printf("%d: %v\n", id, err)
-			} else {
-				ch <- p
+				return
 			}
+			ch <- p
 		}(n)
 	}
 

@@ -20,7 +20,127 @@
     {
       "file": "async/main.go",
       "line": 61,
-      "description": "## Getting IDs\r\n\r\nTo start the program, first we create a variable to hold the start time of the function (\"start\"). Then we call the \"getIds\" function to get a slice of integer values for the data (we'll use these values to make the service calls). And then we print out the slice to the console.\r\n\r\nFor more information on declaring/assigning variables, see previous tour [add tour step here]\r\nFor more information on Println, see previous tour [add tour step here]"
+      "description": "## Getting IDs\r\n\r\nTo start the program, first we create a variable to hold the start time of the function (\"start\"). Then we call the \"getIds\" function to get a slice of integer values for the data (we'll use these values to make the service calls). And then we print out the slice to the console.\r\n\r\nFor more information on declaring/assigning variables, see previous tour [add tour step here]  \r\nFor more information on Println, see previous tour [add tour step here]"
+    },
+    {
+      "file": "async/main.go",
+      "line": 63,
+      "description": "## WaitGroup overview  \r\n\r\nA WaitGroup (from the \"sync\" package), lets us signal when a process is complete. This allows us to coordinate across asynchronous function calls. \"WaitGroup\" has relatively few functions and behaves like a reference counter. (We'll use these as we step through the code).  \r\n\r\n**Add**  \r\nThe \"Add\" function takes an integer parameter. This is generally \"1\", meaning, we're adding 1 to the count.  \r\n\r\n**Done**  \r\nThe \"Done\" function subtracts 1 from the count. This is equivalent to \"Add(-1)\". This signals that this particular item is done.  \r\n\r\n**Wait**  \r\nThe \"Wait\" fuction stop processing until the count reaches 0. This let's us wait until all asynchronous operations are complete before we continue with processing.  \r\n\r\nWe will see all of these functions in operation as we go."
+    },
+    {
+      "file": "async/main.go",
+      "line": 64,
+      "description": "## Channel overview  \r\n\r\nA channel is go allows us to communicate between asynchronous functions. We can think of this as a thread-safe queue. One asynchronous function can add items to a channel and a different function can remove items from the channel. A channel can only hold one type.\r\n\r\n**make**  \r\nThe built-in \"make\" function can be used to create a channel (as well as things like maps and slices). This function creates a channel to hold \"person\" items. The second parameter (\"10\") specifies the capacity of the channel.  \r\n\r\n**Channel capacity**  \r\nThe capacity of the channel is important. The capacity is the maximum number of items that can be held by the channel. If the channel reaches capacity, then any operations to add new items to the channel will block until there is space for the item.\r\n\r\nIf no capacity is specified, then the capacity is 1. This means that only 1 item can be added to the channel. A new item cannot be added to the channel until after the first item is read from the channel.  \r\n\r\n**Writing to a channel**  \r\nTo write to a channel, use the \"<-\" operator pointing **toward** the channel. We'll see this a little later. It may look like this:  \r\n```go\r\n  ch <- p\r\n```\r\nThis reads a value from the channel (\"ch\") an puts it into the variable \"p\". If the channel is already at capacity, this operation will **block** until there is space available.\r\n\r\n**Closing a channel**  \r\nWhen we are done writing to a channel, we should close it. We'll see why this is important when looking a reading from a channel below.  \r\n```go\r\n  close(ch)\r\n```\r\nThis code closes the channel \"ch\".\r\n\r\n**Reading from a channel**  \r\nTo read from a channel, use the \"<-\" operator pointing **away** from the channel. Here's a sample:\r\n```go\r\n  p = <-ch\r\n```\r\nThis code will read a value from the channel (\"ch\") and assign it to the variable \"p\". In addition, we could use the \":=\" operator to declare and assign to a variable.  \r\n\r\nIf we try to read from an empty channel, the operation will **block** until an item is available. If we try to read from a **closed** channel, the operation will not block. This is why it is important to close a channel once we are done writing to it.  \r\n\r\nWe will look at some alternate ways to read from a channel a bit later."
+    },
+    {
+      "file": "async/main.go",
+      "line": 65,
+      "description": "## Looping over the IDs  \r\n\r\nThis \"for\" loop iterates over each of the integers in the \"ids\" slice. This is similar to a \"foreach\" loop in C#. The \"n\" variable is the value of the item in the iteration.\r\n\r\nFor more information on \"for\" loops, see previous tour [add tour step here]"
+    },
+    {
+      "file": "async/main.go",
+      "line": 66,
+      "description": "## Adding to the WaitGroup  \r\n\r\nFor each iteration of the \"for\" loop, we \"Add\" 1 to the WaitGroup variable. Since the \"ids\" slice has 9 items, we eventually end up with a count of 9 in the WaitGroup."
+    },
+    {
+      "file": "async/main.go",
+      "line": 67,
+      "description": "## Goroutine\r\n\r\nUse \"go\" to start a new goroutine. A goroutine does not wait for processing to complete before the current function continues. This is simialar to kicking off an \"async\" method in C#.\r\n\r\nA goroutine can be a normal named function or it can be an anonymous function (like we use here). More on anonymous functions next.",
+      "selection": {
+        "start": {
+          "line": 67,
+          "character": 3
+        },
+        "end": {
+          "line": 67,
+          "character": 5
+        }
+      }
+    },
+    {
+      "file": "async/main.go",
+      "line": 68,
+      "description": "## Subtracting from the WaitGroup\r\n\r\nCalling \"Done\" on the WaitGroup will subtract 1 from the count (the same as \"Add(-1)\"). Since this call to \"Done\" is inside fo the goroutine, it will run once for each call to this anonymous function.  \r\n\r\nThe \"defer\" call means that \"Done\" will not be called until just before the anonymous function exits (simiarl to a \"finally\" in C#).  \r\n\r\nFor more information on \"defer\", see previous tour [add tour step here]"
+    },
+    {
+      "file": "async/main.go",
+      "line": 69,
+      "description": "## Calling a function  \r\n\r\nInside the goroutine, we make a call to the \"getPerson\" function. This function calls a service and returns a populated person struct or an error.\r\n\r\nFor more information on the getPerson function, see previous tour [add tour (entire tour) start here]"
+    },
+    {
+      "file": "async/main.go",
+      "line": 75,
+      "description": "## Anonymous functions  \r\n\r\nAnonymous functions in Go are similar to anonymous delegates in C#. This is an inline function that does not have a name.  \r\n\r\n**Declaring an anonymous function**  \r\nAnonymous functions are declared usig what is known as a \"**function literal**\" in Go. This starts with the \"func\" keyword followed by the parameters, return values, and method body (similar to a normal function declaration, just without the name).  \r\n\r\n**Anonymous function parameters**  \r\nNotice the \"(n)\" after the function body. This is how parameters are passed to an anonymous function. If there are no parameters, then you need a set of empty parentheses here. This code denotes that the \"n\" value (from the \"for\" loop) is used for the \"id\" parameter of the anonymous function.  \r\n\r\n**Closures**  \r\nAnonymous functions in Go also support closures (closures are called \"captured variables\" in C#). This means that the body of the anonymous functions can use whatever variables are in scope of the outer function. In this example, the anonymous function uses \"wg\" (the WaitGroup) as well as \"ch\" (the channel) from the outer function.  \r\n\r\n**DANGER**  \r\nJust like in C#, it is dangerous to use an iterator (such as a \"for\" indexer) as a closure. The same is true of iterator values. You can experiment with this by using \"n\" directly instead of passing it as a parameter -- the results are not as we would expect. The good news is that the Go linter will warn you if you inadvertantly capture an indexer / iterator. This is why we explicitly pass the \"n\" value into the anonymous function as a parameter."
+    },
+    {
+      "file": "async/main.go",
+      "line": 73,
+      "description": "## Checking for errors  \r\n\r\nThis \"if\" checks to see if the error is populated. If it is not nil (\"null\" in C#), then we use the \"log.Printf\" function to output the error.  \r\n\r\nAs is common in Go, the \"if err != nil\" block ends with a return. This short-circuits the function (rather than having an \"else\" block). Because of the \"defer\" above, the WaitGroup will be decremented before the function returns.\r\n\r\n**log.Printf**  \r\n\"log.Printf\" is similar to \"fmt.Printf\". By default, both will output to the console. This is because the console is the default location for the log (used by \"log.Printf\") and the default location for standard out (used by \"fmt.Printf\").  \r\n\r\nOne difference is that \"log\" automatically includes a **time stamp** at the beginning of the output message.  \r\n\r\nFor more information on error handling, see previous tour [add tour step here]  \r\nFor more information on \"log.Printf\", see previous tour [add tour step here]  ",
+      "selection": {
+        "start": {
+          "line": 70,
+          "character": 4
+        },
+        "end": {
+          "line": 73,
+          "character": 14
+        }
+      }
+    },
+    {
+      "file": "async/main.go",
+      "line": 74,
+      "description": "## Writing to a channel\r\n\r\nTo put an item on the channel, use the \"<-\" operator pointing toward the channel. This code puts the \"p\" variable (returned from \"getPerson\") onto the channel.\r\n\r\nIf the channel is at capacity, this operation will **block** until there is space available."
+    },
+    {
+      "file": "async/main.go",
+      "line": 81,
+      "description": "## Another anonymous goroutine\r\n\r\nThis code specifies another goroutine (meaning it will run asynchronously). It is an anonymous function (an inline function) that takes no parameters and returns no values. Notice that the empty parentheses are used for the parameter declaration (after the \"func\") and for passing parameters (after the closing brace).",
+      "selection": {
+        "start": {
+          "line": 78,
+          "character": 2
+        },
+        "end": {
+          "line": 81,
+          "character": 5
+        }
+      }
+    },
+    {
+      "file": "async/main.go",
+      "line": 79,
+      "description": "## Waiting for a WaitGroup\r\n\r\nThe call the \"Wait\" will block until the WaitGroup count is at 0. Above, we have a \"for\" loop that adds to the WaitGroup for each iteration (9 items for this example code). Inside the loop, we have goroutines that call a web service and then decrement the WaitGroup.  \r\n\r\nThis means that this line of code will block until all of the inner goroutines of the \"for\" loop have completed."
+    },
+    {
+      "file": "async/main.go",
+      "line": 80,
+      "description": "## Closing the channel  \r\n\r\nThe built-in \"close\" function is used to close the channel. This is to denote that we will not be writing any new values to the channel. The channel is still available for reading until all of the items have been drained from the channel.  \r\n\r\nThe WaitGroup allows us to wait for all of the asynchronous goroutines (that write to the channel) to finish before we close the channel."
+    },
+    {
+      "file": "async/main.go",
+      "line": 83,
+      "description": "## Reading from a channel  \r\n\r\nThere are several ways to read from a channel.  \r\n\r\n**Example 1:**  \r\n```go\r\n  p := <-ch\r\n```\r\nThis will read a value from the channel (\"ch\") and assign it to the (newly-declared) variable \"p\". If there are **no items** in the channel, this will block until something is available. If the channel is **closed**, then \"p\" will be a nil or default value. (For a \"person\" struct, this would be a struct where all the fields have default values, such as 0 for integers and \"\" for strings).  \r\n\r\n**Example 2:**  \r\n```go\r\n  p, ok := <-ch\r\n  if !ok {\r\n      // channel was closed, p is not valid\r\n  }\r\n```\r\nReading from a channel returns 2 values. (Sometimes the second is ignored as shown above.) The second value is whether the read was successful (true or false). If the channel is closed, then the second value will be false. We can use this to know the channel was closed and not to use the invalid data value.  \r\n\r\n**Example 3:**  \r\n```go\r\n   for p := range ch {\r\n       // p is populated; loop exits when the channel is closed\r\n   }\r\n```  \r\nAnother way of reading from a channel is to use a \"range\" with a \"for\" loop. In this case, \"p\" will hold the value for the channel. If the channel is empty, the next iteration of the loop will block until a value is available. If the channel is closed, the loop will exit."
+    },
+    {
+      "file": "async/main.go",
+      "line": 84,
+      "description": "## Using the channel value\r\n\r\nInside the \"for\" loop, we can use the value that was pulled off the channel. In this case, we use it to output the the console.  \r\n\r\nFor more information on \"fmt.Printf\", see previous tour [add tour step here]"
+    },
+    {
+      "file": "async/main.go",
+      "line": 88,
+      "description": "## Finishing the application  \r\n\r\nThe last steps of this application are to get the elapsed time and output it to the console.  \r\n\r\nThe \"time.Since\" function returns a \"Duration\" that tells how much time has elapsed between the now and the time used as a parameter. In this case, this is the elapsed time since we saved off the \"start\" time above.  \r\n\r\nWe assign this value to the \"elapsed\" variable and output it using a \"Printf\" function call.",
+      "selection": {
+        "start": {
+          "line": 87,
+          "character": 2
+        },
+        "end": {
+          "line": 88,
+          "character": 41
+        }
+      }
     }
   ]
 }

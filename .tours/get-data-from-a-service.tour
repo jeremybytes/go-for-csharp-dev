@@ -5,7 +5,7 @@
     {
       "file": "async/main.go",
       "line": 27,
-      "description": "## Function declaration  \r\n\r\nFor this function, we will call a service to get a \"person\" object back. This function takes one parameter -- the ID of the person object, and returns two values -- the person or an error.  \r\n\r\nThe \"data, error\" return format is common in Go, so we'll copy it here. The functions that we call to get and parse the data also use this return format.\r\n\r\n\r\nFor information about function declaration and parameters, see previous tour [add step here]\r\nFor information about return values, see previous tour [add step here]\r\n",
+      "description": "## Function declaration  \r\n\r\nFor this function, we will call a service to get a \"person\" object back. This function takes one parameter -- the ID of the person object, and returns two values -- the person or an error.  \r\n\r\nThe \"data, error\" return format is common in Go, so we'll copy it here. The functions that we call to get and parse the data also use this return format.\r\n\r\n\r\nFor information about function declaration and parameters, see previous tour [add step here]  \r\nFor information about return values, see previous tour [add step here]\r\n",
       "selection": {
         "start": {
           "line": 54,
@@ -25,7 +25,7 @@
     {
       "file": "async/main.go",
       "line": 29,
-      "description": "## HTTP GET\r\n\r\nThe \"http\" package has a \"Get\" function that will make an HTTP call to a URL and return the results. This function returns a pointer to an HTTP response (*Response) or an error. Only one of these results will be populated. If the error value is populated, then the response value is not valid.\r\n\r\nThe \":=\" both declares and assigns values to the variables \"resp\" and \"err\".\r\n\r\nFor more information on pointers, see previous tour [add tour step here]\r\nFor more information on package, see previous tour [add tour step here]\r\nFor more information on variable declaration, see previous tour [add tour step here]"
+      "description": "## HTTP GET\r\n\r\nThe \"http\" package has a \"Get\" function that will make an HTTP call to a URL and return the results. This function returns a pointer to an HTTP response (*Response) or an error. Only one of these results will be populated. If the error value is populated, then the response value is not valid.\r\n\r\nThe \":=\" both declares and assigns values to the variables \"resp\" and \"err\".\r\n\r\nFor more information on pointers, see previous tour [add tour step here]  \r\nFor more information on package, see previous tour [add tour step here]  \r\nFor more information on variable declaration, see previous tour [add tour step here]"
     },
     {
       "file": "async/main.go",

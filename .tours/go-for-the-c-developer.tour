@@ -94,8 +94,18 @@
     },
     {
       "file": "async/main.go",
-      "line": 3,
-      "description": "## import\r\n\r\nThe \"import\" section specifies that packages that are used in this file. This is similar to \"using\" statements in C#.\r\n\r\n**Go is opinionated**  \r\nIf you list a package that is not used in the file, then you will get a compiler error. The good news is that if you are using an editor helper (such as the \"Go\" extension in Visual Studio Code), unused imports will automatically be removed when you save the file. These helpers will also add the import automatically when you reference a package in the code. So, its best to let the editor helper manage all of this for you."
+      "line": 11,
+      "description": "## import\r\n\r\nThe \"import\" section specifies that packages that are used in this file. This is similar to \"using\" statements in C#.\r\n\r\n**Go is opinionated**  \r\nIf you list a package that is not used in the file, then you will get a compiler error. The good news is that if you are using an editor helper (such as the \"Go\" extension in Visual Studio Code), unused imports will automatically be removed when you save the file. These helpers will also add the import automatically when you reference a package in the code. So, its best to let the editor helper manage all of this for you.",
+      "selection": {
+        "start": {
+          "line": 3,
+          "character": 1
+        },
+        "end": {
+          "line": 11,
+          "character": 2
+        }
+      }
     },
     {
       "file": "async/main.go",
@@ -194,6 +204,21 @@
         "end": {
           "line": 56,
           "character": 2
+        }
+      }
+    },
+    {
+      "file": "async/main.go",
+      "line": 75,
+      "description": "## Anonymous functions\r\n\r\nAnonymous functions allow us to create an inline function that does not have a name. This is similar to an anonymous delegate (or lambda expression) in C#.\r\n\r\nThe format is as follows: \r\n```go\r\n  func(int id) person {\r\n      p, _ := getPerson(id) // Note: ignoring errors for this snippet\r\n      return p\r\n  }(3)\r\n```\r\nAfter the \"func\" keyword, we have the parameters and return values like in a typical function. The only thing missing is the function name. Then the braces mark the function body. After the closing brace, we have a set of parentheses with the parameter value (in this case, \"3\"). If there are no parameter, a set of empty parens are used.\r\n\r\nFor more information on anonymous functions (and this function in particular), see the Parallel Programming tour [add tour step here]",
+      "selection": {
+        "start": {
+          "line": 67,
+          "character": 6
+        },
+        "end": {
+          "line": 75,
+          "character": 7
         }
       }
     }
