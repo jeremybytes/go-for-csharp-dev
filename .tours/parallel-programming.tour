@@ -1,0 +1,26 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "03-Parallel Programming",
+  "steps": [
+    {
+      "file": "async/main.go",
+      "line": 58,
+      "description": "## Exploring parallel programming\r\n\r\nTo explore parallel programming in Go, we will walk through the \"main\" function. This uses goroutines to run asynchronous functions, a Channel to communicate among the various functions, and a WaitGroup to signal when asynchronous processes are complete.",
+      "selection": {
+        "start": {
+          "line": 59,
+          "character": 2
+        },
+        "end": {
+          "line": 61,
+          "character": 18
+        }
+      }
+    },
+    {
+      "file": "async/main.go",
+      "line": 61,
+      "description": "## Getting IDs\r\n\r\nTo start the program, first we create a variable to hold the start time of the function (\"start\"). Then we call the \"getIds\" function to get a slice of integer values for the data (we'll use these values to make the service calls). And then we print out the slice to the console.\r\n\r\nFor more information on declaring/assigning variables, see previous tour [add tour step here]\r\nFor more information on Println, see previous tour [add tour step here]"
+    }
+  ]
+}

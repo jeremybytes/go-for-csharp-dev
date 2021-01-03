@@ -5,9 +5,17 @@ The aim of this project is to provide an overview of Go (golang) language featur
 CodeTour  
 ----------
 **Work in progress**  
-This repository contains a CodeTour to walk you through the various parts of the project code. CodeTour is an extension for Visual Studio Code that can be found here: [CodeTour](https://marketplace.visualstudio.com/items?itemName=vsls-contrib.codetour).  
+This repository contains several CodeTours to walk you through the various parts of the project code. CodeTour is an extension for Visual Studio Code that can be found here: [CodeTour](https://marketplace.visualstudio.com/items?itemName=vsls-contrib.codetour).  
 
-To run the CodeTour, open the root folder of this repo in Visual Studio Code, expand the "CodeTour" item in the Explorer, and click the "Start Tour" button (the green arrow).
+To run the CodeTour, open the root folder of this repo in Visual Studio Code, expand the "CodeTour" item in the Explorer, and click the "Start Tour" button (the green arrow) next to the tour.  
+
+**Tours**
+* *01-Go for the C# Developer*  
+This tour goes through various syntax rules and programming conventions for the Go language. It emphasizes similarities and differences with C#.  
+* *02-Get Data from a Service*  
+This tour walks through the function to get data from a web service. This includes calling the service, parsing the JSON result, and handling errors.  
+* *03-Parallel Programming*  
+This tour walks through the main function that makes service calls in parallel. This includes goroutines, using channels for communication, and using WaitGroup.
 
 Motivation
 ----------

@@ -1,0 +1,96 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "02-Get Data from a Service",
+  "steps": [
+    {
+      "file": "async/main.go",
+      "line": 27,
+      "description": "## Function declaration  \r\n\r\nFor this function, we will call a service to get a \"person\" object back. This function takes one parameter -- the ID of the person object, and returns two values -- the person or an error.  \r\n\r\nThe \"data, error\" return format is common in Go, so we'll copy it here. The functions that we call to get and parse the data also use this return format.\r\n\r\n\r\nFor information about function declaration and parameters, see previous tour [add step here]\r\nFor information about return values, see previous tour [add step here]\r\n",
+      "selection": {
+        "start": {
+          "line": 54,
+          "character": 1
+        },
+        "end": {
+          "line": 56,
+          "character": 2
+        }
+      }
+    },
+    {
+      "file": "async/main.go",
+      "line": 28,
+      "description": "## Creating the URL  \r\n\r\nAn example of the URL we need to use is \"http://localhost:9874/people/3\" (where \"3\" is the ID for the record that we want). To build the URL, we use the \"Sprintf\" function to create a formatted string.\r\n\r\nFor more information on \"Sprintf\", see the previous tour [add tour step here]"
+    },
+    {
+      "file": "async/main.go",
+      "line": 29,
+      "description": "## HTTP GET\r\n\r\nThe \"http\" package has a \"Get\" function that will make an HTTP call to a URL and return the results. This function returns a pointer to an HTTP response (*Response) or an error. Only one of these results will be populated. If the error value is populated, then the response value is not valid.\r\n\r\nThe \":=\" both declares and assigns values to the variables \"resp\" and \"err\".\r\n\r\nFor more information on pointers, see previous tour [add tour step here]\r\nFor more information on package, see previous tour [add tour step here]\r\nFor more information on variable declaration, see previous tour [add tour step here]"
+    },
+    {
+      "file": "async/main.go",
+      "line": 32,
+      "description": "## Checking for errors 1\r\n\r\nIf the error return value is not null, then something went wrong with the \"Get\" operation. Whenever a function returns an error, you should check to see if it is not nil (null) before using the data value.\r\n\r\nIn this case, if there is an error, the function returns an empty person struct (denoted by \"person{}\") and an updated error object which consists of a local error message prepended to the error returned by \"http.Get\". This creates a sort of call stack of error messages.\r\n\r\nFor more information on error handling, see previous tour [add tour step here]",
+      "selection": {
+        "start": {
+          "line": 30,
+          "character": 2
+        },
+        "end": {
+          "line": 32,
+          "character": 3
+        }
+      }
+    },
+    {
+      "file": "async/main.go",
+      "line": 33,
+      "description": "## Closing the Response Body  \r\n\r\nThe response that is returned from \"Get\" has a \"Body\" that needs to be closed (it implements the \"ReadCloser\" interface). You can think of this as similar to an IDisposable in C#; we need to Dispose of the object when we're done with it.  \r\n\r\nThe \"Close\" function on the body is part of the \"ReadCloser\" interface, and is similar to the \"Dispose\" method in C#.  \r\n\r\n**defer**  \r\nThe defer keyword lets us delay calling the close function until the \"getPerson\" function exits. This is similar to the \"finally\" part of a try/finally in C#. This code will run regardless of whether the function exits successfully or with an error."
+    },
+    {
+      "file": "async/main.go",
+      "line": 36,
+      "description": "## Checking the response status  \r\n\r\nIn addition to checking for an error from the \"http.Get\" function, we also want to check that a successful status code (i.e., 200) is returned. For example, if the ID does not exist, an error is not generated, but the status code is 204. [Add status code description here]  \r\n\r\nLike the previous error block, if the status code is anything other than 200, we prepend our own error message and return from the function.",
+      "selection": {
+        "start": {
+          "line": 34,
+          "character": 2
+        },
+        "end": {
+          "line": 36,
+          "character": 3
+        }
+      }
+    },
+    {
+      "file": "async/main.go",
+      "line": 37,
+      "description": "## Declaring a variable\r\n\r\nTo hold the result from the service, we create a variable with the person type. \"var\" declares a variable, \"p\" is the variable name, and \"person\" is the variable type. The default value for \"p\" is an empty struct -- meaning, a struct where all of the fields have default values (such as 0 for integers and \"\" for strings).  \r\n\r\nFor more information on declaring variables, see previous tour [add tour step here]"
+    },
+    {
+      "file": "async/main.go",
+      "line": 38,
+      "description": "## Decoding JSON\r\n\r\nThe response body contains a string using JSON. To parse this, we can use the \"json\" package. Let's break down the pieces of this call a bit more.\r\n\r\n**NewDecoder**  \r\nThe \"NewDecoder\" function takes an \"io.Reader\" as a parameter. This is an interface that has a \"Read\" function. In a previous step, we saw that the response \"Body\" is a \"ReadCloser\" which is an interface that contains both the \"Reader\" and \"Closer\" interfaces. This function returns a pointer to a JSON decoder (*Decoder).\r\n\r\n**Decode**  \r\nThe decoder returned from \"NewDecoder\" has a \"Decode\" function. This function takes \"interface{}\" as a parameter. This denotes an interface that has no members. Since interfaces are implicitly implemented in Go, this means that **any** type fulfills this interfaces. We can think of this as similar to \"Object\" in C# -- every type in C# descends from Object, so it can be used as a parameter type for a function that accepts anything.  \r\n\r\nThe parameter passed is \"&p\". This references the \"p\" variable that was created in the previous step. The \"&\" means that we are passing the address to this variable to the Decode function. This means that the Decode function is able to modify the value of \"p\". This is similar (but not quite the same) as an \"out\" parameter in C#.  \r\n\r\nThe \"Decode\" method returns an error object. (It does not return a data object because it directly modifies the parameter.) Notice that the assignment to the \"err\" variable uses \"=\" and not \":=\". This is because the \"err\" variable already exists (it was created with the call to \"http.Get\").  \r\n\r\nIf you accidentally use \":=\" to assign to a variable that already exists, you will get a compiler error (and a warning from the Go extension in Visual Studio).\r\n\r\nFor more information on packages, see previous tour [add tour step here]\r\nFor more information on pointers, see previous tour [add tour step here]\r\nFor more information on interfaces, see previous tour [add tour step here]"
+    },
+    {
+      "file": "async/main.go",
+      "line": 41,
+      "description": "## Checking for errors 2\r\n\r\nSince \"Decode\" returns an error, we check to make sure there are no errors in decoding before continuing. Just like with the other error checks in this function, we return an empty person and an error with our message prepended.",
+      "selection": {
+        "start": {
+          "line": 39,
+          "character": 2
+        },
+        "end": {
+          "line": 41,
+          "character": 3
+        }
+      }
+    },
+    {
+      "file": "async/main.go",
+      "line": 42,
+      "description": "## Returning results\r\n\r\nIf all goes well, then we end up on the final \"return\". The \"p\" variable should be populated with valid values, so we return \"p\" along with \"nil\" for the error.\r\n\r\nFor more information on returning values, see previous tour [add tour step here]"
+    }
+  ]
+}
