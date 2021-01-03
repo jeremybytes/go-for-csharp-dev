@@ -9,7 +9,7 @@
     },
     {
       "file": "async/main.go",
-      "line": 61,
+      "line": 60,
       "description": "## No semi-colons\r\n\r\nGo does not use semi-colons to end lines. Semi-colons can be used to put two statements on a single line (but as with most languages, this is discouraged).",
       "selection": {
         "start": {
@@ -17,23 +17,23 @@
           "character": 1
         },
         "end": {
-          "line": 61,
-          "character": 18
+          "line": 60,
+          "character": 25
         }
       }
     },
     {
       "file": "async/main.go",
-      "line": 74,
+      "line": 63,
       "description": "## Braces\r\n\r\nFor anything that has a body (functions, for loops, if/else, etc.), opening braces **must** be on the same line. Putting an opening brace on the following line results in a compiler error.\r\n\r\nIn addition, braces are **never optional**. If there is only one line in a body, braces must still be used.",
       "selection": {
         "start": {
-          "line": 70,
+          "line": 58,
           "character": 1
         },
         "end": {
-          "line": 75,
-          "character": 1
+          "line": 63,
+          "character": 6
         }
       }
     },
@@ -49,7 +49,7 @@
     },
     {
       "file": "async/main.go",
-      "line": 65,
+      "line": 68,
       "description": "## No unused variables\r\n\r\nGo does not allow for unused variables. If you declare a variable and then do not use it, you will get a compiler error. To get around this, we can use an underscore \"_\" (known as a **blank identifier**). This means that we will not be using the value.\r\n\r\nThis \"for\" loop using a \"range\" is similar to a \"foreach\" loop in C#. It will iterate over the values in the \"ids\" collection. But \"range\" returns two values (more on multiple return values when we look at function declarations below), the index of the loop and the value of the iteration.\r\n\r\nFor this code, we care about the value (\"n\"), but not the indexer. By using the blank identifier (\"_\") for the indexer, we are noting that we will not be using this value. (We'll look at the different kinds of \"for\" loops a bit later)."
     },
     {
@@ -100,7 +100,7 @@
     {
       "file": "async/main.go",
       "line": 11,
-      "description": "## import\r\n\r\nThe \"import\" section specifies that packages that are used in this file. This is similar to \"using\" statements in C#.\r\n\r\n**Go is opinionated**  \r\nIf you list a package that is not used in the file, then you will get a compiler error. The good news is that if you are using an editor helper (such as the \"Go\" extension in Visual Studio Code), unused imports will automatically be removed when you save the file. These helpers will also add the import automatically when you reference a package in the code. So, its best to let the editor helper manage all of this for you.",
+      "description": "## Importing packages\r\n\r\nThe \"import\" section specifies that packages that are used in this file. This is similar to \"using\" statements in C#.\r\n\r\nThe packages listed here are all included when you install Go. Additional packages can be installed using \"go get [package]\" from the command line.\r\n\r\n**Go is opinionated**  \r\nIf you list a package that is not used in the file, then you will get a compiler error. The good news is that if you are using an editor helper (such as the \"Go\" extension in Visual Studio Code), unused imports will automatically be removed when you save the file. These helpers will also add the import automatically when you reference a package in the code. So, its best to let the editor helper manage all of this for you.",
       "selection": {
         "start": {
           "line": 3,
@@ -114,18 +114,23 @@
     },
     {
       "file": "async/main.go",
-      "line": 61,
+      "line": 64,
       "description": "## fmt.Println\r\n\r\n\"Println\" outputs to standard out (usually the console); the output is followed by a newline. This is similar to Console.WriteLine() in C#.  \r\n\r\n\"Println\" is in the \"fmt\" package. This means that \"fmt\" needs to be in the list of imports at the top of the file. If you are using the Go extension for Visual Studio Code, you can just type \"fmt.Println\" and save the file. When you save, the import is automatically added.\r\n\r\nThe following are equivalent:  \r\nGo  \r\n```go\r\n  fmt.Println(ids)\r\n```\r\n\r\nC#  \r\n```c#\r\n  Console.WriteLine(ids);\r\n```"
     },
     {
       "file": "async/main.go",
-      "line": 84,
+      "line": 13,
+      "description": "## Capitalization is important\r\n\r\nCapitalization is important in Go. A capitalized function name means that the function is exported (meaning, it is visible to other packages that import this) -- similar to a \"public\" item in C#. A function name that starts with a lower case letter means that the function is not visible outside of this package. This is similar to \"protected\" item in C#.  \r\n\r\n**What this means to us**  \r\nWhen we write **our own packages**, lower case functions (and types and other things) will be visible only within the package. If we want something to be visible outside of the package, we need to capitalize the name.  \r\n\r\nWhen we use **external packages**, all of the functions that we call and types that we use will be capitalized.\r\n\r\nExamples from external packages:\r\n```go\r\n  fmt.Println(\"Hello, World!\")\r\n  http.Get(\"http://localhost:8000\")\r\n  json.Unmarshal(body, &data)\r\n```\r\n\r\nThe function names are all capitalized (\"Println\", \"Get\", \"Unmarshal\") so that they can be accessed from outside the packages (\"fmt\", \"http\", \"json\")."
+    },
+    {
+      "file": "async/main.go",
+      "line": 87,
       "description": "## fmt.Printf\r\n\r\n\"Printf\" is a formatted print statement that goes to standard out (usually the console). This uses placeholders and parameters similar to string.Format() in C#.  \r\n\r\nIn this example, the \"%d\" placeholder (called a \"verb\" in Go) will output an number (the id of a \"Person\" object). The \"%v\" verb outputs an item in the \"natural format\". This is similar to the \"ToString\" method in C#. We'll see a bit more of this when we look at interfaces.  \r\n\r\nThe following are equivalent:  \r\nGo  \r\n```go\r\n  fmt.Printf(\"%d: %v\\n\", p.ID, p)\r\n```\r\n\r\nC#  \r\n```c#\r\n  Console.Write(\"{0:d}: {1}\\n\", p.ID, p);\r\n```\r\n\r\nUnlike \"Println\", \"Printf\" does not include a newline automatically, so you most likely want to include a \"\\n\" to insert a newline (just like in C#).  \r\n\r\nUnfortunately, there is no equivalent of string interpolation in Go."
     },
     {
       "file": "async/main.go",
       "line": 28,
-      "description": "## Other print functions\r\n\r\nIn addition to the Println and Printf functions that output to standard out (generally the console), there are other functions to print formatted output.  \r\n\r\n**Strings - Sprintf**  \r\nThe fmt.Sprintf function returns a formatted string. This uses the same placeholders as fmt.Printf.  \r\n\r\n**Files - Fprintf**  \r\nThe fmt.Fprintf function can be used to output a formatted string to a file. This function takes an io.Writer as a parameter. This is often used to write to a file, but it can also be used to write to an HTTP response.  \r\n\r\n**Logs - log.Printf**  \r\nThe \"log\" package has a Printf function that outputs a formatted string to a log. The default location for the log is the console. This differs from the \"fmt.Printf\" function by prepending the formatted string with a timestamp."
+      "description": "## Other print functions\r\n\r\nIn addition to the Println and Printf functions that output to standard out (generally the console), there are other functions to print formatted output.  \r\n\r\n**Strings - Sprintf**  \r\nThe fmt.Sprintf function returns a formatted string. This uses the same placeholders as fmt.Printf.  \r\n\r\n**Files - Fprintf**  \r\nThe fmt.Fprintf function can be used to output a formatted string to a file. This function takes an io.Writer as a parameter. This is often used to write to a file, but it can also be used to write to an HTTP response.  \r\n\r\n**Logs - log.Printf**  \r\nThe \"log\" package has a Printf function that outputs a formatted string to a log. The default location for the log is the console. This differs from the \"fmt.Printf\" function by prepending the formatted string with a timestamp.  \r\n\r\n**Logs - log.Fatalf**  \r\nThe \"log\" package has another function \"Fatalf\". Like \"log.Printf\" it outputs a formatted string to the log (with a timestamp), but it also exits the application with an error code of 1. Another process can check this error code to know that the program exited with errors."
     },
     {
       "file": "async/main.go",
@@ -135,12 +140,12 @@
     {
       "file": "async/main.go",
       "line": 13,
-      "description": "## Function declarations 1\r\n\r\n**func**  \r\nFunction declarations start with the \"func\" keyword.\r\n\r\n**Function Name**  \r\nNext comes the name of the function \"getIds\" for this example.  \r\n\r\n*Note: Capitalization is important in Go. An upper-case function name means that the function is exported (meaning, it is visible to other packages that import this) -- similar to a \"public\" item in C#. A lower-case function name means that the function is not visible outside of this package. This is similar to \"protected\" item in C#.*  \r\n\r\n**Function Parameters**\r\nNext comes the function parameters in parentheses. This function has no parameters, so it has an empty set of parens. Parameters are separated by commas and are declared with the parameter name and then the type. For example, \"(id int)\" would specify a parameter named \"id\" of type integer. This is flipped around compared to declarations in C# that have the type first.  \r\n\r\n**Function Returns**  \r\nNext comes the return types for the function. If there is no return, then this can be left out completely (no empty parens required). Unlike C#, return values can be named. In this example, there is a return value named \"ids\" which is a slice of integer (a slice is basically a dynamic array). Naming return values is optional; you can simply specify the type of you like.\r\n\r\nGo functions can have multiple return values (which is really handy). If there are multiple return values, they are separated by commas. A common pattern in Go is to return a value and an error object. We'll see this a bit later."
+      "description": "## Function declarations 1\r\n\r\n**func**  \r\nFunction declarations start with the \"func\" keyword.\r\n\r\n**Function Name**  \r\nNext comes the name of the function \"getIDs\" for this example.  \r\n\r\nRemember that capitalization is important in Go. A capitalized function name means that the function is exported (meaning, it is visible to other packages that import this) -- similar to a \"public\" item in C#. A function name that starts with a lower case letter means that the function is not visible outside of this package. This is similar to \"protected\" item in C#. In this case, \"getIDs\" is visible only within this package.\r\n\r\n**Function Parameters**\r\nNext comes the function parameters in parentheses. This function has no parameters, so it has an empty set of parens. Parameters are separated by commas and are declared with the parameter name and then the type. For example, \"(id int)\" would specify a parameter named \"id\" of type integer. This is flipped around compared to declarations in C# that have the type first.  \r\n\r\n**Function Returns**  \r\nNext comes the return types for the function. If there is no return, then this can be left out completely (no empty parens required). Go functions can have multiple return values separated by commas. A common pattern in Go is to return a value and an error. This is what we have here.  \r\n\r\nUnlike C#, return values can be named. In this example, there is a return value named \"ids\" which is a slice of integer (a slice is basically a dynamic array). The second return value is named \"err\" and is an error type. Naming return values is optional; you can simply specify the type of you like. We'll see this a bit later."
     },
     {
       "file": "async/main.go",
       "line": 24,
-      "description": "## Bare returns\r\n\r\nIn this function, we have a named return value: \"ids\" (as noted in the previous step). In the body of the function, we assign to the \"ids\" item (this is done in the \"json.Unmarshal\" call on the previous line). To return the value of \"ids\", we can use either of the following:  \r\n\r\n```go\r\n  return ids\r\n```\r\n\r\n```go\r\n  return\r\n```  \r\n\r\nThese statements are equivalent; they both return the value of \"ids\". The second is known as a \"bare return\" since the return is implicit. This is possible because the return value is named in the function declaration. Bare returns can only be used if the return values are named. If they are unnamed, then the value needs to be specified with the \"return\"."
+      "description": "## Bare returns\r\n\r\nIn this function, we have two named return values: \"ids\" and \"err\" (as noted in the previous step). In the body of the function, we assign to the \"ids\" item (this is done in the \"json.Unmarshal\" call on the previous line). If there is an error (in the \"Get\", \"ReadAll\" or \"Unmarshal\" functions), the named \"err\" return value will be populated. To return the value of \"ids\" and \"err\", we can use either of the following:  \r\n\r\n```go\r\n  return ids, err\r\n```\r\nor  \r\n```go\r\n  return\r\n```  \r\n\r\nThese statements are equivalent; they both return the values of \"ids\" and \"err\". The second is known as a \"bare return\" since the return is implicit. This is possible because the return value is named in the function declaration. Bare returns can only be used if the return values are named. If they are unnamed, then the value needs to be specified with the \"return\"."
     },
     {
       "file": "async/main.go",

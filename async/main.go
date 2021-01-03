@@ -10,7 +10,7 @@ import (
 	"time"
 )
 
-func getIds() (ids []int) {
+func getIDs() (ids []int, err error) {
 	resp, err := http.Get("http://localhost:9874/ids")
 	if err != nil {
 		return
@@ -20,7 +20,7 @@ func getIds() (ids []int) {
 	if err != nil {
 		return
 	}
-	json.Unmarshal(body, &ids)
+	err = json.Unmarshal(body, &ids)
 	return
 }
 
@@ -57,7 +57,10 @@ func (p person) String() string {
 
 func main() {
 	start := time.Now()
-	ids := getIds()
+	ids, err := getIDs()
+	if err != nil {
+		log.Fatalf("getIDs failed: %v", err)
+	}
 	fmt.Println(ids)
 
 	var wg sync.WaitGroup
