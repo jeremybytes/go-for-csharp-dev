@@ -63,6 +63,11 @@
     },
     {
       "file": "async/main.go",
+      "line": 75,
+      "description": "## Anonymous functions  \r\n\r\nAnonymous functions in Go are similar to anonymous delegates in C#. This is an inline function that does not have a name.  \r\n\r\n**Declaring an anonymous function**  \r\nAnonymous functions are declared usig what is known as a \"**function literal**\" in Go. This starts with the \"func\" keyword followed by the parameters, return values, and method body (similar to a normal function declaration, just without the name).  \r\n\r\n**Anonymous function parameters**  \r\nNotice the \"(n)\" after the function body. This is how parameters are passed to an anonymous function. If there are no parameters, then you need a set of empty parentheses here. This code denotes that the \"n\" value (from the \"for\" loop) is used for the \"id\" parameter of the anonymous function.  \r\n\r\n**Closures**  \r\nAnonymous functions in Go also support closures (closures are called \"captured variables\" in C#). This means that the body of the anonymous functions can use whatever variables are in scope of the outer function. In this example, the anonymous function uses \"wg\" (the WaitGroup) as well as \"ch\" (the channel) from the outer function.  \r\n\r\n**DANGER**  \r\nJust like in C#, it is dangerous to use an iterator (such as a \"for\" indexer) as a closure. The same is true of iterator values. You can experiment with this by using \"n\" directly instead of passing it as a parameter -- the results are not as we would expect. The good news is that the Go linter will warn you if you inadvertantly capture an indexer / iterator. This is why we explicitly pass the \"n\" value into the anonymous function as a parameter."
+    },
+    {
+      "file": "async/main.go",
       "line": 68,
       "description": "## Subtracting from the WaitGroup\r\n\r\nCalling \"Done\" on the WaitGroup will subtract 1 from the count (the same as \"Add(-1)\"). Since this call to \"Done\" is inside fo the goroutine, it will run once for each call to this anonymous function.  \r\n\r\nThe \"defer\" call means that \"Done\" will not be called until just before the anonymous function exits (simiarl to a \"finally\" in C#).  \r\n\r\n**Additional Information**  \r\n* defer: Tour #1 [Deferring an operation][1 - Go Syntax and Conventions#22]"
     },
@@ -70,11 +75,6 @@
       "file": "async/main.go",
       "line": 69,
       "description": "## Calling a function  \r\n\r\nInside the goroutine, we make a call to the \"getPerson\" function. This function calls a service and returns a populated person struct or an error.\r\n\r\n**Additional Information**  \r\n* \"for\" loops: Tour #2 (entire tour) [Start Tour][2 - Get Data from a Service#1]"
-    },
-    {
-      "file": "async/main.go",
-      "line": 75,
-      "description": "## Anonymous functions  \r\n\r\nAnonymous functions in Go are similar to anonymous delegates in C#. This is an inline function that does not have a name.  \r\n\r\n**Declaring an anonymous function**  \r\nAnonymous functions are declared usig what is known as a \"**function literal**\" in Go. This starts with the \"func\" keyword followed by the parameters, return values, and method body (similar to a normal function declaration, just without the name).  \r\n\r\n**Anonymous function parameters**  \r\nNotice the \"(n)\" after the function body. This is how parameters are passed to an anonymous function. If there are no parameters, then you need a set of empty parentheses here. This code denotes that the \"n\" value (from the \"for\" loop) is used for the \"id\" parameter of the anonymous function.  \r\n\r\n**Closures**  \r\nAnonymous functions in Go also support closures (closures are called \"captured variables\" in C#). This means that the body of the anonymous functions can use whatever variables are in scope of the outer function. In this example, the anonymous function uses \"wg\" (the WaitGroup) as well as \"ch\" (the channel) from the outer function.  \r\n\r\n**DANGER**  \r\nJust like in C#, it is dangerous to use an iterator (such as a \"for\" indexer) as a closure. The same is true of iterator values. You can experiment with this by using \"n\" directly instead of passing it as a parameter -- the results are not as we would expect. The good news is that the Go linter will warn you if you inadvertantly capture an indexer / iterator. This is why we explicitly pass the \"n\" value into the anonymous function as a parameter."
     },
     {
       "file": "async/main.go",
