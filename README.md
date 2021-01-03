@@ -4,7 +4,6 @@ The aim of this project is to provide an overview of Go (golang) language featur
 
 CodeTour  
 ----------
-**Work in progress**  
 This repository contains several CodeTours to walk you through the various parts of the project code. CodeTour is an extension for Visual Studio Code that can be found here: [CodeTour](https://marketplace.visualstudio.com/items?itemName=vsls-contrib.codetour).  
 
 To run the CodeTour, open the root folder of this repo in Visual Studio Code, expand the "CodeTour" item in the Explorer, and click the "Start Tour" button (the green arrow) next to the tour.  

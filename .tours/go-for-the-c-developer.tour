@@ -1,7 +1,12 @@
 {
   "$schema": "https://aka.ms/codetour-schema",
-  "title": "01-Go for the C# Developer",
+  "title": "1 - Go Syntax and Conventions",
+  "nextTour": "2 - Get Data from a Service",
   "steps": [
+    {
+      "title": "Introduction",
+      "description": "## Introduction\r\n\r\nThis tour gives an overview of various syntax rules and programming conventions for the Go language. This is targeted at the C# developer and emphasizes similarities and differences between the languages.  \r\n\r\nFor information on running the code, please see the \"**README.md**\" file at the root of the project.\r\n\r\nOtherwise, click \"Next\" to get started!"
+    },
     {
       "file": "async/main.go",
       "line": 61,
@@ -120,7 +125,7 @@
     {
       "file": "async/main.go",
       "line": 28,
-      "description": "## Other print functions\r\n\r\nIn addition to the Println and Printf functions that output to standard out (generally the console), there are other functions to print formatted output.  \r\n\r\n**Strings - Sprintf**  \r\nThe fmt.Sprintf function returns a formatted string. This uses the same placeholders as fmt.Printf.  \r\n\r\n**Files - Fprintf**  \r\nThe fmt.Fprintf function can be used to output a formatted string to a file. This function takes an io.Writer as a parameter. This is often used to write to a file, but it can also be used to write to an HTTP response.  "
+      "description": "## Other print functions\r\n\r\nIn addition to the Println and Printf functions that output to standard out (generally the console), there are other functions to print formatted output.  \r\n\r\n**Strings - Sprintf**  \r\nThe fmt.Sprintf function returns a formatted string. This uses the same placeholders as fmt.Printf.  \r\n\r\n**Files - Fprintf**  \r\nThe fmt.Fprintf function can be used to output a formatted string to a file. This function takes an io.Writer as a parameter. This is often used to write to a file, but it can also be used to write to an HTTP response.  \r\n\r\n**Logs - log.Printf**  \r\nThe \"log\" package has a Printf function that outputs a formatted string to a log. The default location for the log is the console. This differs from the \"fmt.Printf\" function by prepending the formatted string with a timestamp."
     },
     {
       "file": "async/main.go",

@@ -1,7 +1,11 @@
 {
   "$schema": "https://aka.ms/codetour-schema",
-  "title": "03-Parallel Programming",
+  "title": "3 - Parallel Programming",
   "steps": [
+    {
+      "title": "Introduction",
+      "description": "## Introduction  \r\n\r\nThis tour walks through the \"main\" function that makes service calls in parallel. This includes goroutines, using channels for communication, and using WaitGroup.  \r\n\r\nClick \"Next\" to see the how to parallel program in Go!"
+    },
     {
       "file": "async/main.go",
       "line": 58,
@@ -20,7 +24,7 @@
     {
       "file": "async/main.go",
       "line": 61,
-      "description": "## Getting IDs\r\n\r\nTo start the program, first we create a variable to hold the start time of the function (\"start\"). Then we call the \"getIds\" function to get a slice of integer values for the data (we'll use these values to make the service calls). And then we print out the slice to the console.\r\n\r\nFor more information on declaring/assigning variables, see previous tour [add tour step here]  \r\nFor more information on Println, see previous tour [add tour step here]"
+      "description": "## Getting IDs\r\n\r\nTo start the program, first we create a variable to hold the start time of the function (\"start\"). Then we call the \"getIds\" function to get a slice of integer values for the data (we'll use these values to make the service calls). And then we print out the slice to the console.\r\n\r\n**Additional Information**  \r\n* Declaring and assigning variables: Tour #1 [Variable declaration and assignment][1 - Go Syntax and Conventions#5]\r\n* Println: Tour #1 [fmt.Println][1 - Go Syntax and Conventions#12]"
     },
     {
       "file": "async/main.go",
@@ -35,7 +39,7 @@
     {
       "file": "async/main.go",
       "line": 65,
-      "description": "## Looping over the IDs  \r\n\r\nThis \"for\" loop iterates over each of the integers in the \"ids\" slice. This is similar to a \"foreach\" loop in C#. The \"n\" variable is the value of the item in the iteration.\r\n\r\nFor more information on \"for\" loops, see previous tour [add tour step here]"
+      "description": "## Looping over the IDs  \r\n\r\nThis \"for\" loop iterates over each of the integers in the \"ids\" slice. This is similar to a \"foreach\" loop in C#. The \"n\" variable is the value of the item in the iteration.  \r\n\r\n**Additional Information**  \r\n* \"for\" loops: Tour #1 [for loops][1 - Go Syntax and Conventions#21]"
     },
     {
       "file": "async/main.go",
@@ -60,12 +64,12 @@
     {
       "file": "async/main.go",
       "line": 68,
-      "description": "## Subtracting from the WaitGroup\r\n\r\nCalling \"Done\" on the WaitGroup will subtract 1 from the count (the same as \"Add(-1)\"). Since this call to \"Done\" is inside fo the goroutine, it will run once for each call to this anonymous function.  \r\n\r\nThe \"defer\" call means that \"Done\" will not be called until just before the anonymous function exits (simiarl to a \"finally\" in C#).  \r\n\r\nFor more information on \"defer\", see previous tour [add tour step here]"
+      "description": "## Subtracting from the WaitGroup\r\n\r\nCalling \"Done\" on the WaitGroup will subtract 1 from the count (the same as \"Add(-1)\"). Since this call to \"Done\" is inside fo the goroutine, it will run once for each call to this anonymous function.  \r\n\r\nThe \"defer\" call means that \"Done\" will not be called until just before the anonymous function exits (simiarl to a \"finally\" in C#).  \r\n\r\n**Additional Information**  \r\n* defer: Tour #1 [Deferring an operation][1 - Go Syntax and Conventions#22]"
     },
     {
       "file": "async/main.go",
       "line": 69,
-      "description": "## Calling a function  \r\n\r\nInside the goroutine, we make a call to the \"getPerson\" function. This function calls a service and returns a populated person struct or an error.\r\n\r\nFor more information on the getPerson function, see previous tour [add tour (entire tour) start here]"
+      "description": "## Calling a function  \r\n\r\nInside the goroutine, we make a call to the \"getPerson\" function. This function calls a service and returns a populated person struct or an error.\r\n\r\n**Additional Information**  \r\n* \"for\" loops: Tour #2 (entire tour) [Start Tour][2 - Get Data from a Service#1]"
     },
     {
       "file": "async/main.go",
@@ -75,7 +79,7 @@
     {
       "file": "async/main.go",
       "line": 73,
-      "description": "## Checking for errors  \r\n\r\nThis \"if\" checks to see if the error is populated. If it is not nil (\"null\" in C#), then we use the \"log.Printf\" function to output the error.  \r\n\r\nAs is common in Go, the \"if err != nil\" block ends with a return. This short-circuits the function (rather than having an \"else\" block). Because of the \"defer\" above, the WaitGroup will be decremented before the function returns.\r\n\r\n**log.Printf**  \r\n\"log.Printf\" is similar to \"fmt.Printf\". By default, both will output to the console. This is because the console is the default location for the log (used by \"log.Printf\") and the default location for standard out (used by \"fmt.Printf\").  \r\n\r\nOne difference is that \"log\" automatically includes a **time stamp** at the beginning of the output message.  \r\n\r\nFor more information on error handling, see previous tour [add tour step here]  \r\nFor more information on \"log.Printf\", see previous tour [add tour step here]  ",
+      "description": "## Checking for errors  \r\n\r\nThis \"if\" checks to see if the error is populated. If it is not nil (\"null\" in C#), then we use the \"log.Printf\" function to output the error.  \r\n\r\nAs is common in Go, the \"if err != nil\" block ends with a return. This short-circuits the function (rather than having an \"else\" block). Because of the \"defer\" above, the WaitGroup will be decremented before the function returns.\r\n\r\n**log.Printf**  \r\n\"log.Printf\" is similar to \"fmt.Printf\". By default, both will output to the console. This is because the console is the default location for the log (used by \"log.Printf\") and the default location for standard out (used by \"fmt.Printf\").  \r\n\r\nOne difference is that \"log\" automatically includes a **time stamp** at the beginning of the output message.  \r\n\r\n**Additional Information**  \r\n* Error handling: Tour #1 [Error handling][1 - Go Syntax and Conventions#20]\r\n* log.Printf: Tour #1 [Other print functions][1 - Go Syntax and Conventions#13]",
       "selection": {
         "start": {
           "line": 70,
@@ -83,7 +87,7 @@
         },
         "end": {
           "line": 73,
-          "character": 14
+          "character": 5
         }
       }
     },
@@ -125,7 +129,7 @@
     {
       "file": "async/main.go",
       "line": 84,
-      "description": "## Using the channel value\r\n\r\nInside the \"for\" loop, we can use the value that was pulled off the channel. In this case, we use it to output the the console.  \r\n\r\nFor more information on \"fmt.Printf\", see previous tour [add tour step here]"
+      "description": "## Using the channel value\r\n\r\nInside the \"for\" loop, we can use the value that was pulled off the channel. In this case, we use it to output the the console.  \r\n\r\n**Additional Information**  \r\n* Printf: Tour #1 [fmt.Printf][1 - Go Syntax and Conventions#12]"
     },
     {
       "file": "async/main.go",
