@@ -11,7 +11,7 @@ import (
 )
 
 func getIDs() (ids []int, err error) {
-	resp, err := http.Get("http://localhost:9874/ids")
+	resp, err := http.Get("http://localhost:9874/people/ids")
 	if err != nil {
 		return
 	}

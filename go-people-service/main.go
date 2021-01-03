@@ -12,7 +12,7 @@ import (
 
 func main() {
 	rtr := mux.NewRouter()
-	rtr.HandleFunc("/ids", idHandler)
+	rtr.HandleFunc("/people/ids", idHandler)
 	rtr.HandleFunc("/people", peopleHandler)
 	rtr.HandleFunc("/people/{id:[0-9]+}", personHandler)
 	http.Handle("/", rtr)
@@ -30,12 +30,14 @@ func idHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func peopleHandler(w http.ResponseWriter, r *http.Request) {
+	time.Sleep(3 * time.Second)
 	p := getPeople()
 	output, _ := json.Marshal(p)
 	w.Write(output)
 }
 
 func personHandler(w http.ResponseWriter, r *http.Request) {
+	time.Sleep(1 * time.Second)
 	vars := mux.Vars(r)
 	id, _ := strconv.Atoi(vars["id"])
 	p := getPerson(id)
