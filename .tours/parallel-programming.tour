@@ -9,17 +9,7 @@
     {
       "file": "async/main.go",
       "line": 58,
-      "description": "## Exploring parallel programming\r\n\r\nTo explore parallel programming in Go, we will walk through the \"main\" function. This uses goroutines to run asynchronous functions, a Channel to communicate among the various functions, and a WaitGroup to signal when asynchronous processes are complete.",
-      "selection": {
-        "start": {
-          "line": 59,
-          "character": 2
-        },
-        "end": {
-          "line": 61,
-          "character": 18
-        }
-      }
+      "description": "## Exploring parallel programming\r\n\r\nTo explore parallel programming in Go, we will walk through the \"main\" function. This uses goroutines to run asynchronous functions, a channel to communicate among the various functions, and a WaitGroup to signal when asynchronous processes are complete."
     },
     {
       "file": "async/main.go",

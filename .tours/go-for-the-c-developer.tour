@@ -179,7 +179,7 @@
     },
     {
       "file": "async/main.go",
-      "line": 65,
+      "line": 68,
       "description": "## for loops\r\n\r\nGo has one type of loop: the \"for\" loop. The good news is that this can be used the same as \"for\", \"foreach\", and \"while\" in C#.  \r\n\r\n**Indexed for loop**  \r\n```go\r\n  for i := 0; i < len(ids); i++ {\r\n      // use the indexer here.\r\n  }\r\n```\r\nSimilar to a \"for\" loop in C#, the \"for\" loop in go can be used as a loop with an indexer. In this loop, the built-in \"len\" function gives us the length of the \"ids\" slice.  \r\n\r\n**Iteration (foreach)**  \r\n```go\r\n  for index, value := range ids {\r\n      a := ids[index]\r\n      b := value\r\n      // a & b have the same value.\r\n  }\r\n```\r\nThe \"for\" loop can be used with a range similar to a \"foreach\" in C#. The loop will iterate one time for each item in the range. Unlike \"foreach\" in C#, using \"range\" in Go returns two values: the index and the value. This gives us the option of using the indexer or the actual item value. Often we want to use just one of these inside the loop, so we use the blank identifier (\"_\") for the one we do not need.\r\n\r\nNote: if we do not need to capture the value or the indexer (we just want to iterate a certain number of times), we can leave out the variable assignments.\r\n\r\n```go\r\n  for range ids {\r\n    // the body will run based on the number of items in the range\r\n  }\r\n```\r\n\r\n**while(true)**  \r\nSometimes in C#, we want to use a \"while(true)\" as an endless loop that is terminated with a break statement inside the loop body. This can be done using \"for\" with no condition in Go.  \r\n\r\n```go\r\n  for {\r\n    // endless loop that runs until \"break\" is used.\r\n  }\r\n```\r\n\r\n**break & continue**  \r\n\"break\" and \"continue\" can be used on \"for\" loops in Go. They behave just the same as in C#. \"break\" stops the loop; \"continue\" moves to the next iteration of the loop."
     },
     {
@@ -219,15 +219,15 @@
     },
     {
       "file": "async/main.go",
-      "line": 75,
+      "line": 78,
       "description": "## Anonymous functions\r\n\r\nAnonymous functions allow us to create an inline function that does not have a name. This is similar to an anonymous delegate (or lambda expression) in C#.\r\n\r\nThe format is as follows: \r\n```go\r\n  func(int id) person {\r\n      p, _ := getPerson(id) // Note: ignoring errors for this snippet\r\n      return p\r\n  }(3)\r\n```\r\nAfter the \"func\" keyword, we have the parameters and return values like in a typical function. The only thing missing is the function name. Then the braces mark the function body. After the closing brace, we have a set of parentheses with the parameter value (in this case, \"3\"). If there are no parameter, a set of empty parens are used.\r\n\r\nFor more information on anonymous functions (and this function in particular), see the Parallel Programming tour [add tour step here]",
       "selection": {
         "start": {
-          "line": 67,
+          "line": 70,
           "character": 6
         },
         "end": {
-          "line": 75,
+          "line": 78,
           "character": 7
         }
       }
