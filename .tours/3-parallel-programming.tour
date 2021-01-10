@@ -14,17 +14,17 @@
     {
       "file": "async/main.go",
       "line": 60,
-      "description": "## Getting IDs\r\n\r\nTo start the program, first we create a variable to hold the start time of the function (\"start\"). Then we call the \"getIDs\" function to get a slice of integer values for the data (we'll use these values to make the service calls).\r\n\r\n**Additional Information**  \r\n* Declaring and assigning variables: Tour #1 [Variable declaration and assignment][1 - Go Syntax and Conventions#5]"
+      "description": "## Getting IDs\r\n\r\nTo start the program, first we create a variable to hold the start time of the function (\"start\"). Then we call the \"getIDs\" function to get a slice of integer values for the data (we'll use these values to make the service calls).\r\n\r\n**Additional Information**  \r\n* Declaring and assigning variables: Tour #1 [Variable declaration and assignment][1 - Go Syntax and Conventions#8]"
     },
     {
       "file": "async/main.go",
       "line": 63,
-      "description": "## Checking for errors  \r\n\r\nThe \"if\" statement checks to see if an error occurred. If so, we use the \"log.Fatalf\" to write a message to the log and exit the application with an error code.  \r\n\r\nHere is a sample output if the application is run when the service is not available:  \r\n\r\n```\r\n2021/01/03 11:46:33 getIDs failed: Get \"http://localhost:9874/ids\": dial tcp [::1]:9874: \r\nconnectex: No connection could be made because the target machine actively refused it.\r\n```\r\n\r\nThe \"log.Fatalf\" function combines logging with exiting with an error. It is equivalent to the following code:  \r\n\r\n```go\r\n  log.Printf(\"getIDs failed: %v\", err)\r\n  os.Exit(1)\r\n```\r\n\r\n**Additional Information**  \r\n* Error handling: Tour #1 [Error handling][1 - Go Syntax and Conventions#20]\r\n* log.Fatalf: Tour #1 [Other print functions][1 - Go Syntax and Conventions#13]"
+      "description": "## Checking for errors  \r\n\r\nThe \"if\" statement checks to see if an error occurred. If so, we use the \"log.Fatalf\" to write a message to the log and exit the application with an error code.  \r\n\r\nHere is a sample output if the application is run when the service is not available:  \r\n\r\n```\r\n2021/01/03 11:46:33 getIDs failed: Get \"http://localhost:9874/ids\": dial tcp [::1]:9874: \r\nconnectex: No connection could be made because the target machine actively refused it.\r\n```\r\n\r\nThe \"log.Fatalf\" function combines logging with exiting with an error. It is equivalent to the following code:  \r\n\r\n```go\r\n  log.Printf(\"getIDs failed: %v\", err)\r\n  os.Exit(1)\r\n```\r\n\r\n**Additional Information**  \r\n* Error handling: Tour #1 [Error handling][1 - Go Syntax and Conventions#22]\r\n* log.Fatalf: Tour #1 [Other print functions][1 - Go Syntax and Conventions#14]"
     },
     {
       "file": "async/main.go",
       "line": 64,
-      "description": "## Printing the IDs\r\n\r\nThis outputs the contents of the \"ids\" slice to the console. The output looks like this:\r\n\r\n```\r\n[1 2 3 4 5 6 7 8 9]\r\n```\r\n\r\n**Additional Information**  \r\n* Println: Tour #1 [fmt.Println][1 - Go Syntax and Conventions#12]\r\n"
+      "description": "## Printing the IDs\r\n\r\nThis outputs the contents of the \"ids\" slice to the console. The output looks like this:\r\n\r\n```\r\n[1 2 3 4 5 6 7 8 9]\r\n```\r\n\r\n**Additional Information**  \r\n* Println: Tour #1 [fmt.Println][1 - Go Syntax and Conventions#11]\r\n"
     },
     {
       "file": "async/main.go",
@@ -39,7 +39,7 @@
     {
       "file": "async/main.go",
       "line": 68,
-      "description": "## Looping over the IDs  \r\n\r\nThis \"for\" loop iterates over each of the integers in the \"ids\" slice. This is similar to a \"foreach\" loop in C#. The \"n\" variable is the value of the item in the iteration.  \r\n\r\n**Additional Information**  \r\n* \"for\" loops: Tour #1 [for loops][1 - Go Syntax and Conventions#21]"
+      "description": "## Looping over the IDs  \r\n\r\nThis \"for\" loop iterates over each of the integers in the \"ids\" slice. This is similar to a \"foreach\" loop in C#. The \"n\" variable is the value of the item in the iteration.  \r\n\r\n**Additional Information**  \r\n* \"for\" loops: Tour #1 [for loops][1 - Go Syntax and Conventions#16]"
     },
     {
       "file": "async/main.go",
@@ -64,7 +64,7 @@
     {
       "file": "async/main.go",
       "line": 78,
-      "description": "## Anonymous functions  \r\n\r\nAnonymous functions in Go are similar to anonymous delegates in C#. This is an inline function that does not have a name.  \r\n\r\n**Declaring an anonymous function**  \r\nAnonymous functions are declared usig what is known as a \"**function literal**\" in Go. This starts with the \"func\" keyword followed by the parameters, return values, and method body (similar to a normal function declaration, just without the name).  \r\n\r\n**Anonymous function parameters**  \r\nNotice the \"(n)\" after the function body. This is how parameters are passed to an anonymous function. If there are no parameters, then you need a set of empty parentheses here. This code denotes that the \"n\" value (from the \"for\" loop) is used for the \"id\" parameter of the anonymous function.  \r\n\r\n**Closures**  \r\nAnonymous functions in Go also support closures (closures are called \"captured variables\" in C#). This means that the body of the anonymous functions can use whatever variables are in scope of the outer function. In this example, the anonymous function uses \"wg\" (the WaitGroup) as well as \"ch\" (the channel) from the outer function.  \r\n\r\n**DANGER**  \r\nJust like in C#, it is dangerous to use an iterator (such as a \"for\" indexer) as a closure. The same is true of iterator values. You can experiment with this by using \"n\" directly instead of passing it as a parameter -- the results are not as we would expect. The good news is that the Go linter will warn you if you inadvertantly capture an indexer / iterator. This is why we explicitly pass the \"n\" value into the anonymous function as a parameter.",
+      "description": "## Anonymous functions  \r\n\r\nAnonymous functions in Go are similar to anonymous delegates in C#. This is an inline function that does not have a name.  \r\n\r\n**Declaring an anonymous function**  \r\nAnonymous functions are declared usig what is known as a \"**function literal**\" in Go. This starts with the \"func\" keyword followed by the parameters, return values, and method body (similar to a normal function declaration, just without the name).  \r\n\r\n**Anonymous function parameters**  \r\nNotice the \"(n)\" after the function body. This is how parameters are passed to an anonymous function. If there are no parameters, then you need a set of empty parentheses here. This code denotes that the \"n\" value (from the \"for\" loop) is used for the \"id\" parameter of the anonymous function.  \r\n\r\n**Closures**  \r\nAnonymous functions in Go also support closures (closures are called \"captured variables\" in C#). This means that the body of the anonymous functions can use whatever variables are in scope of the outer function. In this example, the anonymous function uses \"wg\" (the WaitGroup) as well as \"ch\" (the channel) from the outer function.  \r\n\r\n**DANGER**  \r\nJust like in C#, it is dangerous to use an iterator (such as a \"for\" indexer) as a closure. The same is true of iterator values. You can experiment with this by using \"n\" directly instead of passing it as a parameter -- the results are not as we would expect. The good news is that the Go linter will warn you if you inadvertantly capture an indexer / iterator. This is why we explicitly pass the \"n\" value into the anonymous function as a parameter.  \r\n\r\n**Additional Information**  \r\n* Anonymous functions and function literals: Tour #1 [Anonymous functions][1 - Go Syntax and Conventions#27]",
       "selection": {
         "start": {
           "line": 70,
@@ -72,24 +72,24 @@
         },
         "end": {
           "line": 78,
-          "character": 13
+          "character": 7
         }
       }
     },
     {
       "file": "async/main.go",
       "line": 71,
-      "description": "## Subtracting from the WaitGroup\r\n\r\nCalling \"Done\" on the WaitGroup will subtract 1 from the count (the same as \"Add(-1)\"). Since this call to \"Done\" is inside fo the goroutine, it will run once for each call to this anonymous function.  \r\n\r\nThe \"defer\" call means that \"Done\" will not be called until just before the anonymous function exits (simiarl to a \"finally\" in C#).  \r\n\r\n**Additional Information**  \r\n* defer: Tour #1 [Deferring an operation][1 - Go Syntax and Conventions#22]"
+      "description": "## Subtracting from the WaitGroup\r\n\r\nCalling \"Done\" on the WaitGroup will subtract 1 from the count (the same as \"Add(-1)\"). Since this call to \"Done\" is inside fo the goroutine, it will run once for each call to this anonymous function.  \r\n\r\nThe \"defer\" call means that \"Done\" will not be called until just before the anonymous function exits (simiarl to a \"finally\" in C#).  \r\n\r\n**Additional Information**  \r\n* defer: Tour #1 [Deferring an operation][1 - Go Syntax and Conventions#26]"
     },
     {
       "file": "async/main.go",
       "line": 72,
-      "description": "## Calling a function  \r\n\r\nInside the goroutine, we make a call to the \"getPerson\" function. This function calls a service and returns a populated person struct or an error.\r\n\r\n**Additional Information**  \r\n* \"for\" loops: Tour #2 (entire tour) [Start Tour][2 - Get Data from a Service#1]"
+      "description": "## Calling a function  \r\n\r\nInside the goroutine, we make a call to the \"getPerson\" function. This function calls a service and returns a populated person struct or an error.\r\n\r\n**Additional Information**  \r\n* \"getPerson\" function: Tour #2 (entire tour) [Start Tour][2 - Get Data from a Service#1]"
     },
     {
       "file": "async/main.go",
       "line": 76,
-      "description": "## Checking for errors  \r\n\r\nThis \"if\" checks to see if the error is populated. If it is not nil (\"null\" in C#), then we use the \"log.Printf\" function to output the error.  \r\n\r\nAs is common in Go, the \"if err != nil\" block ends with a return. This short-circuits the function (rather than having an \"else\" block). Because of the \"defer\" above, the WaitGroup will be decremented before the function returns.\r\n\r\n**log.Printf**  \r\n\"log.Printf\" is similar to \"fmt.Printf\". By default, both will output to the console. This is because the console is the default location for the log (used by \"log.Printf\") and the default location for standard out (used by \"fmt.Printf\").  \r\n\r\nOne difference is that \"log\" automatically includes a **time stamp** at the beginning of the output message.  \r\n\r\n**Additional Information**  \r\n* Error handling: Tour #1 [Error handling][1 - Go Syntax and Conventions#20]\r\n* log.Printf: Tour #1 [Other print functions][1 - Go Syntax and Conventions#13]",
+      "description": "## Checking for errors  \r\n\r\nThis \"if\" checks to see if the error is populated. If it is not nil (\"null\" in C#), then we use the \"log.Printf\" function to output the error.  \r\n\r\nAs is common in Go, the \"if err != nil\" block ends with a return. This short-circuits the function (rather than having an \"else\" block). Because of the \"defer\" above, the WaitGroup will be decremented before the function returns.\r\n\r\n**log.Printf**  \r\n\"log.Printf\" is similar to \"fmt.Printf\". By default, both will output to the console. This is because the console is the default location for the log (used by \"log.Printf\") and the default location for standard out (used by \"fmt.Printf\").  \r\n\r\nOne difference is that \"log\" automatically includes a **time stamp** at the beginning of the output message.  \r\n\r\n**Additional Information**  \r\n* Error handling: Tour #1 [Error handling][1 - Go Syntax and Conventions#22]\r\n* log.Printf: Tour #1 [Other print functions][1 - Go Syntax and Conventions#14]",
       "selection": {
         "start": {
           "line": 73,
@@ -144,12 +144,12 @@
     {
       "file": "async/main.go",
       "line": 87,
-      "description": "## Using the channel value\r\n\r\nInside the \"for\" loop, we can use the value that was pulled off the channel. In this case, we use it to output the the console.  \r\n\r\n**Additional Information**  \r\n* Printf: Tour #1 [fmt.Printf][1 - Go Syntax and Conventions#12]"
+      "description": "## Using the channel value\r\n\r\nInside the \"for\" loop, we can use the value that was pulled off the channel. In this case, we use it to output the the console.  \r\n\r\n**Output**  \r\nThe output looks like the following:\r\n```\r\n5: Dave Lister\r\n9: Isaac Gampu\r\n1: John Koenig\r\n2: Dylan Hunt\r\n7: John Sheridan\r\n4: John Crichton\r\n8: Dante Montana\r\n3: Leela Turanga\r\n6: Laura Roslin\r\n```\r\n\r\n**Additional Information**  \r\n* Printf: Tour #1 [fmt.Printf][1 - Go Syntax and Conventions#13]"
     },
     {
       "file": "async/main.go",
       "line": 91,
-      "description": "## Finishing the application  \r\n\r\nThe last steps of this application are to get the elapsed time and output it to the console.  \r\n\r\nThe \"time.Since\" function returns a \"Duration\" that tells how much time has elapsed between the now and the time used as a parameter. In this case, this is the elapsed time since we saved off the \"start\" time above.  \r\n\r\nWe assign this value to the \"elapsed\" variable and output it using a \"Printf\" function call.",
+      "description": "## Finishing the application  \r\n\r\nThe last steps of this application are to get the elapsed time and output it to the console.  \r\n\r\nThe \"time.Since\" function returns a \"Duration\" that tells how much time has elapsed between the now and the time used as a parameter. In this case, this is the elapsed time since we saved off the \"start\" time above.  \r\n\r\nWe assign this value to the \"elapsed\" variable and output it using a \"Printf\" function call.  \r\n\r\n**Output**  \r\nThe final output looks like the following:\r\n```\r\n[1 2 3 4 5 6 7 8 9]\r\n5: Dave Lister\r\n9: Isaac Gampu\r\n1: John Koenig\r\n2: Dylan Hunt\r\n7: John Sheridan\r\n4: John Crichton\r\n8: Dante Montana\r\n3: Leela Turanga\r\n6: Laura Roslin\r\nTotal time: 1.6783436s\r\n```",
       "selection": {
         "start": {
           "line": 90,
