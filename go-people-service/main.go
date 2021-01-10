@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
 	"strconv"
@@ -40,7 +41,11 @@ func personHandler(w http.ResponseWriter, r *http.Request) {
 	time.Sleep(1 * time.Second)
 	vars := mux.Vars(r)
 	id, _ := strconv.Atoi(vars["id"])
-	p := getPerson(id)
+	p, err := getPerson(id)
+	if err != nil {
+		w.WriteHeader(http.StatusNoContent)
+		return
+	}
 	output, _ := json.Marshal(p)
 	w.Write(output)
 }
@@ -60,13 +65,13 @@ func parseDate(input string) time.Time {
 	return date
 }
 
-func getPerson(id int) person {
+func getPerson(id int) (person, error) {
 	for _, n := range getPeople() {
 		if n.ID == id {
-			return n
+			return n, nil
 		}
 	}
-	return person{}
+	return person{}, fmt.Errorf("Cannot find Person ID %d", id)
 }
 
 func getPeople() (people []person) {
