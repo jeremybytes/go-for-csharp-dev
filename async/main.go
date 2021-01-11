@@ -13,12 +13,12 @@ import (
 func getIDs() (ids []int, err error) {
 	resp, err := http.Get("http://localhost:9874/people/ids")
 	if err != nil {
-		return
+		return nil, fmt.Errorf("error fetching ids: %v", err)
 	}
 	defer resp.Body.Close()
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		return
+		return nil, fmt.Errorf("error reading response body: %v", err)
 	}
 	err = json.Unmarshal(body, &ids)
 	return
