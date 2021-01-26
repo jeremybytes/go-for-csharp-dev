@@ -4,7 +4,7 @@ The aim of this project is to provide an overview of Go (golang) language featur
 
 CodeTour  
 ----------
-This repository contains several CodeTours to walk you through the various parts of the project code. CodeTour is an extension for Visual Studio Code that can be found here: [CodeTour](https://marketplace.visualstudio.com/items?itemName=vsls-contrib.codetour).  
+This repository contains several CodeTours to walk you through the various parts of the project code. CodeTour is an extension for Visual Studio Code that can be found here: **[CodeTour](https://marketplace.visualstudio.com/items?itemName=vsls-contrib.codetour)**.  
 
 To run the CodeTour, open the root folder of this repo in Visual Studio Code, expand the "CodeTour" item in the Explorer, and click the "Start Tour" button (the green arrow) next to the tour.  
 
@@ -15,6 +15,8 @@ This tour goes through various syntax rules and programming conventions for the 
 This tour walks through the function to get data from a web service. This includes calling the service, parsing the JSON result, and handling errors.  
 * *3 - Parallel Programming*  
 This tour walks through the main function that makes service calls in parallel. This includes goroutines, using channels for communication, and using WaitGroup.
+
+More information on CodeTour: **[CodeTour and Visual Studio Code](https://jeremybytes.blogspot.com/2020/08/codetour-and-visual-studio-code.html)**
 
 Motivation
 ----------
@@ -80,4 +82,18 @@ If you would like a step-by-step walkthrough of how this application was built, 
 
 Other Topics
 ------------
-This is by no means an exhaustive look at Go. Additional topics and topics to look into further include packages, exports, project structure, types, interfaces, and pointers.
+This is by no means an exhaustive look at Go. Additional topics and topics to look into further include packages, exports, project structure, types, interfaces, and pointers.  
+
+Here are a few articles (written by me):  
+* [Go (golang) Loops - A Unified "for"](https://jeremybytes.blogspot.com/2021/01/go-golang-loops-unified-for.html)  
+* [Go (golang) defer - A Better "finally"](https://jeremybytes.blogspot.com/2021/01/go-golang-defer-making-sure-something.html)  
+* [Go (golang) Error Handling - A Different Philosophy](https://jeremybytes.blogspot.com/2021/01/go-golang-error-handling-different.html)  
+* [Go (golang) Multiple Return Values - Different from C# Tuples](https://jeremybytes.blogspot.com/2021/01/go-golang-multiple-return-values.html)  
+* [Go (golang) Goroutines - Running Functions Asynchronously](https://jeremybytes.blogspot.com/2021/01/go-golang-goroutines-running-functions.html)  
+* [Go and Interfaces](https://jeremybytes.blogspot.com/2020/07/go-and-interfaces.html)  
+
+Other Resources:
+* Learn Go interactively: [A Tour Of Go](https://tour.golang.org/)  
+* The official site: [golang.org](https://golang.org/)  
+* Installation: [Getting Started](https://golang.org/doc/install)  
+* Visual Studio Code extension: [Go Language Extension](https://code.visualstudio.com/docs/languages/go)  
