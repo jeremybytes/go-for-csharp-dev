@@ -90,6 +90,8 @@ Here are a few articles (written by me):
 * [Go (golang) Error Handling - A Different Philosophy](https://jeremybytes.blogspot.com/2021/01/go-golang-error-handling-different.html)  
 * [Go (golang) Multiple Return Values - Different from C# Tuples](https://jeremybytes.blogspot.com/2021/01/go-golang-multiple-return-values.html)  
 * [Go (golang) Goroutines - Running Functions Asynchronously](https://jeremybytes.blogspot.com/2021/01/go-golang-goroutines-running-functions.html)  
+* [Go (golang) Channels - Moving Data Between Concurrent Processes](https://jeremybytes.blogspot.com/2021/01/go-golang-channels-moving-data-between.html)  
+* [Go (golang) WaitGroup - Signal that a Concurrent Operation is Complete](https://jeremybytes.blogspot.com/2021/02/go-golang-waitgroup-signal-that.html)
 * [Go and Interfaces](https://jeremybytes.blogspot.com/2020/07/go-and-interfaces.html)  
 
 Other Resources:
